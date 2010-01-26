@@ -1,4 +1,4 @@
-#labels YouTube
+#labels YouTube,jQuery,GoogleMaps,Ajax
 _Form Builder Class - jQuery Slider_
  <wiki:video url="http://www.youtube.com/watch?v=nd5KjfznXYs" width="560" height="340"/>
 
