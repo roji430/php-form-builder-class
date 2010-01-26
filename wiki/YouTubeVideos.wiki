@@ -1,6 +1,6 @@
 #labels YouTube
 _Form Builder Class - jQuery Slider_
-<wiki:video url="http://www.youtube.com/watch?v=nd5KjfznXYs" width="560" height="340"/>
+ <wiki:video url="http://www.youtube.com/watch?v=nd5KjfznXYs" width="560" height="340"/>
 
 _Form Builder Class - Ajax Example_
-<wiki:video url="http://www.youtube.com/watch?v=dwg8iVj8weE" width="560" height="340"/>
+ <wiki:video url="http://www.youtube.com/watch?v=dwg8iVj8weE" width="560" height="340"/>
