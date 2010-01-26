@@ -4,3 +4,9 @@ _Form Builder Class - jQuery Slider_
 
 _Form Builder Class - Ajax Example_
  <wiki:video url="http://www.youtube.com/watch?v=dwg8iVj8weE" width="560" height="340"/>
+
+_Form Builder Class - Google Maps Location_
+ <wiki:video url="http://www.youtube.com/watch?v=Bws_P7JlqnQ" width="560" height="340"/>
+
+_Form Builder Class - Custom Implementations_
+ <wiki:video url="http://www.youtube.com/watch?v=GJ90epejXec" width="560" height="340"/>
