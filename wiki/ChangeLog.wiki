@@ -1,0 +1,3 @@
+Version 0.9.7
+*  Added html form element type.  Demo page can view at http://www.imavex.com/formbuilder/examples/googlecodeissue_5.php.
+* Corrected cross site scripting vulnerabilities in example files.
