@@ -9,3 +9,4 @@ Version 0.9.8 - _Released 01/30/2010_
   * Replaced Animated GIF Captcha with reCAPTCHA - <a href="http://www.imavex.com/formbuilder/examples/captcha.php">view example page</a>.
   * Corrected syntax issue in web editor js section.
   * Corrected several more xhtml discrepancies.
+  * Added optional parameter to render() function for returning string instead of echoing html content
