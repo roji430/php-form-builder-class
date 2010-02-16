@@ -12,3 +12,4 @@ Version 0.9.8 - _Released 01/30/2010_
   * Added optional parameter to render() function for returning string instead of echoing html content
   * 02/13/2010 - Corrected several more xhtml discrepancies.
   * 02/15/2010 - Found and correct a bug occurring when using the setReferenceValues method.  Special thanks to saleh.alghamdi for bringing this issue to my attention.
+  * 02/16/2010 - Updated example files adding title tags as well as correcting a few wording issues.
