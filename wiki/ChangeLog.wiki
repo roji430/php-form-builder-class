@@ -1,4 +1,4 @@
-#labels Featured
+#labels Featured,HistoryofChanges
 Version 0.9.7 - _Released 01/28/2010_
   * Added html form element type - <a href="http://www.imavex.com/formbuilder/examples/googlecodeissue_5.php">view example page</a>.
   * Corrected cross site scripting vulnerabilities in example files.
