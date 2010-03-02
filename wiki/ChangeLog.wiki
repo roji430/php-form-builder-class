@@ -16,3 +16,7 @@ Version 0.9.8 - _Released 01/30/2010_
   * 02/20/2010 - Changed radio button form element type.  Previously, one radio button in each radio button group was checked by default making the required attribute irrelevant.  Now, no radio buttons will be checked by default if no value is pass to the addRadio method.  This change also affects the truefalse and yesno form element types as they both ultimately use the radio element.
   * 02/24/2010 - reCAPTCHA public and private keys can now be specified to reduce security issues.  Special thanks to moncojhr for bringing this issue to my attention.
   * 02/24/2010 - Found and corrected bug related to preHTML attribute.  Previously, this attribute would only be rendered if a form element label was supplied.
+
+Version 0.9.9 - _Released 02/02/2010_
+  * Added jQuery color picker field
+  * Several minor enhancements inside class.form.php
