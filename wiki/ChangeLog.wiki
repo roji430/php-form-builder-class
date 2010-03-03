@@ -18,5 +18,7 @@ Version 0.9.8 - _Released 01/30/2010_
   * 02/24/2010 - Found and corrected bug related to preHTML attribute.  Previously, this attribute would only be rendered if a form element label was supplied.
 
 Version 0.9.9 - _Released 02/02/2010_
-  * Added jQuery color picker field
-  * Several minor enhancements inside class.form.php
+  * 03/02/2010 - Added jQuery color picker field
+  * 03/02/2010 - Several minor enhancements inside class.form.php
+  * 03/02/2010 - Minor cosmetic tweaks to tooltips.
+  * 03/02/2010 - Added jqueryDateFormat form attribute which allows developers to control the formatting of dates returned by the date and daterange fields.
