@@ -26,3 +26,4 @@ Version 0.9.9 - _Released 02/02/2010_
 Version 1.0.0 - _Released 02/04/2010_
   * 03/04/2010 - Added CKEditor web editor field courtesy of moncojhr
   * 03/04/2010 - Found and corrected bug related to setting initial form field's focus
+  * 03/07/2010 - Found and corrected javascript error in focus setting section
