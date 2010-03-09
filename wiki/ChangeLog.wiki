@@ -30,4 +30,5 @@ Version 1.0.0 - _Released 02/04/2010_
   * 03/07/2010 - Added hint element attribute (example coming in near future)
   * 03/08/2010 - Updated to Google Maps API v3 (no longer need API key parameter)
   * 03/09/2010 - Corrected php notice message in latlng form element
+  * 03/09/2010 - Corrected bug within hint functionality
   
