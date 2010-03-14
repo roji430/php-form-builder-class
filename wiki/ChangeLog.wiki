@@ -31,4 +31,10 @@ Version 1.0.0 - _Released 02/04/2010_
   * 03/08/2010 - Updated to Google Maps API v3 (no longer need API key parameter)
   * 03/09/2010 - Corrected php notice message in latlng form element
   * 03/09/2010 - Corrected bug within hint functionality
+
+Version 1.0.1 - _Unreleased_
+  * 03/10/2010 - Replaced/combined checkForm() and captchaIsValid() function into one function - validate()
+  * 03/12/2010 - Fixed bug with rating element occurring during javascript validation
+  * 03/12/2010 - Added errorMsgFormat form attribute for customizing js/php error messages
+  * 03/12/2010 - Added latlngDefaultLocation form attribute for controlling where the marker is placed on the google map initially - with no value assigned
   
