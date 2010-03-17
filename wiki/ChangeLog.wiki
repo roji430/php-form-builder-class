@@ -37,4 +37,6 @@ Version 1.0.1 - _Unreleased_
   * 03/12/2010 - Fixed bug with rating element occurring during javascript validation
   * 03/12/2010 - Added errorMsgFormat form attribute for customizing js/php error messages
   * 03/12/2010 - Added latlngDefaultLocation form attribute for controlling where the marker is placed on the google map initially - with no value assigned
+  * 03/17/2010 - Updated examples to accomodate version change
+  * 03/17/2010 - Remove some unneeded files from ckeditor directory
   
