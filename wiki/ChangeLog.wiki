@@ -40,4 +40,5 @@ Version 1.0.1 - _Released 03/17/2010_
   * 03/17/2010 - Updated examples to accomodate version change
   * 03/17/2010 - Remove some unneeded files from ckeditor directory
   * 03/17/2010 - Updated tooltip icon image
-  
+  * 03/19/2010 - Fixed IE bug with tooltips
+  * 03/19/2010 - Fixed IE bug with rating element
