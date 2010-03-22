@@ -2,3 +2,4 @@ The purpose of this wiki page is to get your suggestions on what new features yo
 
   * Javascript/PHP Email Address Validation
   * time Form Element
+  * Replace table structure with CSS friendly markup
