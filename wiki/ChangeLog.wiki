@@ -43,3 +43,8 @@ Version 1.0.1 - _Released 03/17/2010_
   * 03/19/2010 - Fixed IE bug with tooltips
   * 03/19/2010 - Fixed IE bug with rating element
   * 03/21/2010 - Added Conditional Scenarios example
+
+Version 1.0.2 - _Unreleased_
+  * 03/22/2010 - Added includesRelativePath form attribute which combines/replaces jqueryPath, tinymcePath, ckeditorPath, and captchaPath
+  * 03/22/2010 - Updated examples files to accomodate includesRelativePath attribute
+  * 03/22/2010 - Removed path-attributes.php example file
