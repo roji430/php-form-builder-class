@@ -1,12 +1,12 @@
 #labels Featured
 Version 0.9.7 - _Released 01/28/2010_
-  * Added html form element type - <a href="http://www.imavex.com/formbuilder/examples/googlecodeissue_5.php">view example page</a>.
+  * Added html form element type
   * Corrected cross site scripting vulnerabilities in example files.
   * Corrected several xhtml discrepancies.
   * Converted all php shorthand open tags (<?) to full open tags (<?php).
 
 Version 0.9.8 - _Released 01/30/2010_
-  * Replaced Animated GIF Captcha with reCAPTCHA - <a href="http://www.imavex.com/formbuilder/examples/captcha.php">view example page</a>.
+  * Replaced Animated GIF Captcha with reCAPTCHA
   * Corrected syntax issue in web editor js section.
   * Corrected several more xhtml discrepancies.
   * Added optional parameter to render() function for returning string instead of echoing html content
