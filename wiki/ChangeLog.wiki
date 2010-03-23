@@ -49,3 +49,6 @@ Version 1.0.2 - _Unreleased_
   * 03/22/2010 - Updated examples files to accomodate includesRelativePath attribute
   * 03/22/2010 - Removed path-attributes.php example file
   * 03/22/2010 - Added example file explaining includesRelativePath attribute
+  * 03/23/2010 - Added email form element type w/validation
+  * 03/23/2010 - Added email validation example
+  * 03/23/2010 - Updated index.php to include various additions included in version 1.0.2
