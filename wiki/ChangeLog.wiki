@@ -52,3 +52,4 @@ Version 1.0.2 - _Unreleased_
   * 03/23/2010 - Added email form element type w/validation
   * 03/23/2010 - Added email validation example
   * 03/23/2010 - Updated index.php to include various additions included in version 1.0.2
+  * 03/24/2010 - Updated jquery sortable functionality to correct IE issue
