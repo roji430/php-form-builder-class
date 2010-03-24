@@ -4,3 +4,4 @@ The purpose of this wiki page is to get your suggestions on what new features yo
   * time Form Element
   * Replace table structure with CSS friendly markup
   * Option to include processing dialog for ajax submission
+  * Include system requirements (PHP version)
