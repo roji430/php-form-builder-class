@@ -1,6 +1,6 @@
 The purpose of this wiki page is to get your suggestions on what new features you would like to see included in this project.  Please submit these suggestions through the comment field provided below for this wiki page and I will post them on this page.
 
-  * --Javascript/PHP Email Address Validation--
+  * -- Javascript/PHP Email Address Validation --
   * time Form Element
   * Replace table structure with CSS friendly markup
   * Option to include processing dialog for ajax submission
