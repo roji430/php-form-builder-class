@@ -53,4 +53,5 @@ Version 1.0.2 - _Released 03/24/2010_
   * 03/23/2010 - Added email validation example
   * 03/23/2010 - Updated index.php to include various additions included in version 1.0.2
   * 03/24/2010 - Updated jquery sortable functionality to correct IE issue
-  * 03/24/2010 - Added system requirements (PHP 5 or greater) 
+  * 03/24/2010 - Added system requirements (PHP 5 or greater)
+  * 03/26/2010 - Added ajaxPreCallback attribute w/newly added 3rd ajax example for demonstration purposes
