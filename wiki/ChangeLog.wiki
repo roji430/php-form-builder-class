@@ -60,3 +60,4 @@ Version 1.0.2 - _Released 03/24/2010_
   * 03/28/2010 - Added new ajax example demoing manual ajax submission
   * 03/28/2010 - Added onsubmitFunctionOverride form attribute
   * 04/01/2010 - Adding bind() function for nested form elements rendered via elementsToString()
+  * 04/01/2010 - Updated Conditional Scenarios example to include bind() functionality
