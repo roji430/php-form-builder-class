@@ -62,3 +62,5 @@ Version 1.0.2 - _Released 03/24/2010_
   * 04/01/2010 - Adding bind() function for nested form elements rendered via elementsToString()
   * 04/01/2010 - Updated Conditional Scenarios example to include bind() functionality
   * 04/02/2010 - Added ckeditorCustomConfig form attribute
+  * 04/08/2010 - Updated markup/css of index.php file and all example files
+  * 04/08/2010 - Correct bug with bind() function.  Updated Conditional Scenarios example file.
