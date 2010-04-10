@@ -1,4 +1,6 @@
 #labels Featured
+For a detailed list of changes to this project, please see the commit log at http://code.google.com/p/php-form-builder-class/source/list.
+
 Version 0.9.7 - _Released 01/28/2010_
   * Added html form element type
   * Corrected cross site scripting vulnerabilities in example files.
