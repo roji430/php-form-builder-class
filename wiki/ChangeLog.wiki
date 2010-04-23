@@ -68,7 +68,7 @@ Version 1.0.2 - _Released 03/24/2010_
   * 04/08/2010 - Correct bug with bind() function.  Updated Conditional Scenarios example file.
 
 Version 1.0.3 - _Unreleased_
-  * includesRelativePath form attribute renamed to includesPath and supports both relative and absolute paths to include directory.
+  * includesRelativePath form attribute renamed to includesPath and now supports both relative and absolute paths to includes directory.
   * Replaced table markup with flexible div layout.  
   * Removed all table specific form attributes: tableAttributes, tdAttributes, etc.
   * Added hard coded classes on div/label containers for styling.
