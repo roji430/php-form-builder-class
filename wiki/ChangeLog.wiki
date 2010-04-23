@@ -66,3 +66,12 @@ Version 1.0.2 - _Released 03/24/2010_
   * 04/02/2010 - Added ckeditorCustomConfig form attribute
   * 04/08/2010 - Updated markup/css of index.php file and all example files
   * 04/08/2010 - Correct bug with bind() function.  Updated Conditional Scenarios example file.
+
+Version 1.0.3 - _Unreleased_
+  * includesRelativePath form attribute renamed to includesPath and supports both relative and absolute paths to include directory.
+  * Replaced table markup with flexible div layout.  
+  * Removed all table specific form attributes: tableAttributes, tdAttributes, etc.
+  * Added hard coded classes on div/label containers for styling.
+  * Removed name attribute from form tag.
+  * Added doctypes to example files.
+  * Added php/css file in examples directory - pfbc-css.php - showing default styles that can be used.
