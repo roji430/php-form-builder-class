@@ -75,3 +75,4 @@ Version 1.0.3 - _Released 04/23/2010_
   * Removed name attribute from form tag.
   * Added doctypes to example files.
   * Added php/css file in examples directory - pfbc-css.php - showing default styles that can be used.
+  * 04/24/2010 - Added preventDefaultCSS form attribute for not including the default css that is applied.
