@@ -5,7 +5,7 @@ The purpose of this wiki page is to get your suggestions on what new features yo
 
   *  <strike>Javascript/PHP Email Address Validation</strike> - _Version 1.0.2_
   * time Form Element
-  * Replace table structure with CSS friendly markup
+  * <strike>Replace table structure with CSS friendly markup</strike> - _Version 1.0.3_
   * <strike>Option to include processing dialog for ajax submission</strike> - _Version 1.0.2_
   * <strike>Include system requirements (PHP version)</strike> - _Version 1.0.2_
   * <strike>Add new conditional scenario example using select box w/onchange event</strike> - _Version 1.0.2_
