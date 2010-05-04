@@ -78,6 +78,6 @@ Version 1.0.3 - _Released 04/23/2010_
   * 04/24/2010 - Added preventDefaultCSS form attribute for not including the default css that is applied.
   * 04/26/2010 - Added Custom CSS Styling example file
 
-Version 1.0.4 - _Unreleased_
-  * Added xhtml strict Compliance
-  * Updated all example files and index.php to be xhtml strict compliant 
+Version 1.0.4 - _Released 05/04/2010_
+  * Added xhtml strict 1.0 compliance
+  * Updated all example files and index.php to be xhtml strict 1.0 compliant 
