@@ -90,3 +90,4 @@ Version 1.0.5 - _Unreleased_
   * Added preview button to TinyMCE control panel.
   * Updated CKEditor to version 3.2.1
   * Replaced javascript error alerts with a more visually pleasing solution.
+  * Updated qTip and Star Rating jQuery plugins to accomodate move to jQuery 1.4.2
