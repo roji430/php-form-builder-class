@@ -83,7 +83,7 @@ Version 1.0.4 - _Released 05/04/2010_
   * Updated all example files and index.php to be xhtml strict 1.0 compliant 
   * 05/06/2010 - Added support for sesssion_name()
 
-Version 1.0.5 - _Unreleased_
+Version 1.0.5 - _Released 05/10/2010_
   * Updated jQuery to version 1.4.2
   * Updated jQuery UI to version 1.8.1
   * Updated TinyMCE to version 3.3.5.1
