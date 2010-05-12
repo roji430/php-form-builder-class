@@ -3,8 +3,8 @@ The purpose of this wiki page is to get your suggestions on what new features yo
 
 *IMPORTANT:* If you have a general implementation question about this project or you would like to report a bug, please either use the issue tracker at http://code.google.com/p/php-form-builder-class/issues/list or the developer community at http://groups.google.com/group/php-form-builder-class.
 
-  *  <strike>Javascript/PHP Email Address Validation</strike> - _Version 1.0.2_
-  * time Form Element
+  * <strike>Javascript/PHP Email Address Validation</strike> - _Version 1.0.2_
+  * <strike>time Form Element</strike> - _Version 1.0.6_
   * <strike>Replace table structure with CSS friendly markup</strike> - _Version 1.0.3_
   * <strike>Option to include processing dialog for ajax submission</strike> - _Version 1.0.2_
   * <strike>Include system requirements (PHP version)</strike> - _Version 1.0.2_
