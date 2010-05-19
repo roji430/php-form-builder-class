@@ -5,7 +5,7 @@ Google Groups - http://groups.google.com/group/php-form-builder-class/
 */
 
 class base {
-	/*This class provides two methods - setAttributes and debug - that can be used for all classes that extend this class 
+	/*This class provides two methods - setAttributes and debug - that can be used for all classes that extend this class
 	which are form, option, element, and button.*/
 	function setAttributes($params) {
 		if(!empty($params) && is_array($params))
@@ -24,7 +24,7 @@ class base {
 						/*Using array_merge prevents any default values from being overwritten.*/
 						if(is_array($value))
 							$this->$key = array_merge($this->$key, $value);
-					}	
+					}
 					else
 						$this->$key = $value;
 				}
@@ -44,11 +44,11 @@ class base {
 	}
 }
 
-class form extends base { 
+class form extends base {
 	/*Variables that can be set through the setAttributes function on the base class.*/
 	protected $attributes;				/*HTML attributes attached to <form> tag.*/
 	protected $map;						/*Unrelated to latlng/map field type.  Used to control table structure.*/
-	protected $mapMargin;				/*When using the map form attribute, this setting controls the spacing between columns.*/		
+	protected $mapMargin;				/*When using the map form attribute, this setting controls the spacing between columns.*/
 	protected $ajax;					/*Activate ajax form submission.*/
 	protected $ajaxType;				/*Specify form submission as get/post.*/
 	protected $ajaxUrl;					/*Where to send ajax submission.*/
@@ -82,7 +82,6 @@ class form extends base {
 	protected $onsubmitFunction;		/*Allows onsubmit function for handling js error checking and ajax submission to be renamed.*/
 	protected $preventDefaultCSS;		/*Prevents default css from being applied.  Allows for custom styling.*/
 	protected $jsErrorFunction;			/*Allows js function for handling rendering error error messages to be defined.*/
-	protected $generateExternalResources;		/*Renders javascript and css in js.php/css.php.*/
 
 	/*Variables that can only be set inside this class.*/
 	private $elements;					/*Contains all element objects for a form.*/
@@ -112,11 +111,12 @@ class form extends base {
 	private $latlngIDArr;				/*Uniquely identifies each latlng element.*/
 	private $jqueryCheckSort;			/*Indicates there is a checksort field.*/
 	private $hasFormTag;				/*Indicates that the form was generated via the render() function as apposed to the elementsToString() function.*/
+	private $generateInlineResources;		/*Indicates if the headData and bodyData tags were used.*/
 
 	/*Variables that can be accessed outside this class directly.*/
 	public $errorMsg;					/*Contains human readable error message set in validate() method.*/
 
-	public function __construct($id = "myform") 
+	public function __construct($id = "myform")
 	{
 		$id = preg_replace("/[^a-zA-Z0-9]/", "_", $id);
 		/*Provide default values for class variables.*/
@@ -165,7 +165,7 @@ class form extends base {
 		$ele->setAttributes($params);
 		$eleType = &$ele->attributes["type"];
 
-		/*This set of conditions handles form elements requiring the $option class.*/		
+		/*This set of conditions handles form elements requiring the $option class.*/
 		if($eleType == "state")
 		{
 			/*This section prevents the stateArr from being generated for each form and/or multiple state field types per form.*/
@@ -259,7 +259,7 @@ class form extends base {
 				$opt->setAttributes($this->stateArr[$s]);
 				$ele->options[] = $opt;
 			}
-		}	
+		}
 		elseif($eleType == "country")
 		{
 			/*This section prevents the countryArr from being generated for each form and/or multiple country field types per form.*/
@@ -715,7 +715,7 @@ class form extends base {
 			{
 				if(substr($ele->height, -2) != "px")
 					$ele->height .= "px";
-			}		
+			}
 
 			$this->jquerySliderIDArr[$ele->attributes["id"]] = $ele;
 		}
@@ -751,7 +751,7 @@ class form extends base {
 		{
 			/*This section ensures that each tooltip has a unique identifier.*/
 			if(!isset($this->tooltipIDArr))
-				$this->tooltipIDArr = array(); 
+				$this->tooltipIDArr = array();
 			$ele->tooltipID = "tooltip_" . rand(0, 999);
 			while(array_key_exists($ele->tooltipID, $this->tooltipIDArr))
 				$ele->tooltipID = "tooltip_" . rand(0, 999);
@@ -770,11 +770,11 @@ class form extends base {
 		if(!empty($type))
 			$params["type"] = $type;
 		$params["value"] = $value;
-			
+
 		/*Commonly used attributes such as name, type, and value exist as parameters in the function.  All other attributes
 		that need to be included should be passed in the additionalParams field.  This field should exist as an associative
 		array with the key being the attribute's name.  Examples of attributes passed in the additionalParams field include
-		style, class, and onkeyup.*/	
+		style, class, and onkeyup.*/
 		if(!empty($additionalParams) && is_array($additionalParams))
 		{
 			foreach($additionalParams as $key => $value)
@@ -836,25 +836,25 @@ class form extends base {
 	public function addSelect($label, $name, $value="", $options="", $additionalParams="") {
 		if(!is_array($additionalParams))
 			$additionalParams = array();
-		$additionalParams["options"] = $options;	
+		$additionalParams["options"] = $options;
 		$this->addElement($label, $name, "select", $value, $additionalParams);
 	}
 	public function addRadio($label, $name, $value="", $options="", $additionalParams="") {
 		if(!is_array($additionalParams))
 			$additionalParams = array();
-		$additionalParams["options"] = $options;	
+		$additionalParams["options"] = $options;
 		$this->addElement($label, $name, "radio", $value, $additionalParams);
 	}
 	public function addCheckbox($label, $name, $value="", $options="", $additionalParams="") {
 		if(!is_array($additionalParams))
 			$additionalParams = array();
-		$additionalParams["options"] = $options;	
+		$additionalParams["options"] = $options;
 		$this->addElement($label, $name, "checkbox", $value, $additionalParams);
 	}
 	public function addSort($label, $name, $options="", $additionalParams="") {
 		if(!is_array($additionalParams))
 			$additionalParams = array();
-		$additionalParams["options"] = $options;	
+		$additionalParams["options"] = $options;
 		$this->addElement($label, $name, "sort", "", $additionalParams);
 	}
 	public function addLatLng($label, $name, $value="", $additionalParams="") {
@@ -867,19 +867,19 @@ class form extends base {
 	public function addCheckSort($label, $name, $value="", $options="", $additionalParams="") {
 		if(!is_array($additionalParams))
 			$additionalParams = array();
-		$additionalParams["options"] = $options;	
+		$additionalParams["options"] = $options;
 		$this->addElement($label, $name, "checksort", $value, $additionalParams);
 	}
 	public function addCaptcha($label="", $additionalParams="") {
 		$this->addElement($label, "recaptcha_response_field", "captcha", "", $additionalParams);
-	}	
+	}
 	public function addSlider($label, $name, $value="", $additionalParams="") {
 		$this->addElement($label, $name, "slider", $value, $additionalParams);
 	}
 	public function addRating($label, $name, $value="", $options="", $additionalParams="") {
 		if(!is_array($additionalParams))
 			$additionalParams = array();
-		$additionalParams["options"] = $options;	
+		$additionalParams["options"] = $options;
 		$this->addElement($label, $name, "rating", $value, $additionalParams);
 	}
 	public function addHTML($value) {
@@ -937,6 +937,7 @@ class form extends base {
 	}
 
         public function headData(){
+                $this->generateInlineResources = True;
             	$str = '<style type="text/css">';
 		$str .= $this->renderCSS(true);
 		$str .= "</style>";
@@ -944,6 +945,7 @@ class form extends base {
         }
 
         public function bodyData(){
+                $this->generateInlineResources = True;
                 return $this->render(TRUE);
         }
 
@@ -951,6 +953,11 @@ class form extends base {
 	public function render($returnString=false)
 	{
 		$this->hasFormTag = 1;
+
+                if(empty($this->generateInlineResources)){
+                    $this->generateInlineResources = False;
+                }
+
 		$content = $this->elementsToString();
 
 		if(!$returnString)
@@ -1018,9 +1025,9 @@ class form extends base {
 						continue;
 					if(in_array($key, $tmpAllowFieldArr))
 						$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-				}	
+				}
 			}
-			if(!empty($this->checkform) || !empty($this->ajax) || !empty($this->captchaExists) || !empty($this->hintExists) || !empty($this->emailExists))	
+			if(!empty($this->checkform) || !empty($this->ajax) || !empty($this->captchaExists) || !empty($this->hintExists) || !empty($this->emailExists))
 				$str .= ' onsubmit="return ' . $this->onsubmitFunction . '(this);"';
 			$str .= ">";
 		}
@@ -1031,7 +1038,7 @@ class form extends base {
 		{
 			$mapIndex = 0;
 			$mapCount = 0;
-		}	
+		}
 
 		$elementSize = sizeof($this->elements);
 
@@ -1048,13 +1055,13 @@ class form extends base {
 						$ele->attributes["value"] = $this->referenceValues[$ele->attributes["name"]];
 					elseif(substr($ele->attributes["name"], -2) == "[]" && array_key_exists(substr($ele->attributes["name"], 0, -2), $this->referenceValues))
 						$ele->attributes["value"] = $this->referenceValues[substr($ele->attributes["name"], 0, -2)];
-				}	
+				}
 
 				if(!$hiddenElementExists)
 				{
 					$str .= "\n\t" . '<div class="pfbc-hidden">';
 					$hiddenElementExists = true;
-				}	
+				}
 
 				$str .= "\n\t\t<input";
 				if(!empty($ele->attributes) && is_array($ele->attributes))
@@ -1064,11 +1071,11 @@ class form extends base {
 					{
 						if(in_array($key, $tmpAllowFieldArr))
 							$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-					}		
+					}
 				}
 				$str .= "/>";
 			}
-		}	
+		}
 		if($hiddenElementExists)
 			$str .= "\n\t</div>";
 
@@ -1085,7 +1092,7 @@ class form extends base {
 					$ele->attributes["value"] = $this->referenceValues[$ele->attributes["name"]];
 				elseif(substr($ele->attributes["name"], -2) == "[]" && array_key_exists(substr($ele->attributes["name"], 0, -2), $this->referenceValues))
 					$ele->attributes["value"] = $this->referenceValues[substr($ele->attributes["name"], 0, -2)];
-			}	
+			}
 
 			/*Hidden values do not need to be inside any table cell container; therefore, they are handled differently than the other fields.*/
 			if($ele->attributes["type"] != "hidden")
@@ -1098,13 +1105,13 @@ class form extends base {
 						{
 							$map_element_first = true;
 							$str .= "\n\t" . '<div class="pfbc-map pfbc-clear">';
-						}	
+						}
 					}
 					else
 					{
 						$map_element_first = true;
 						$str .= "\n\t" . '<div class="pfbc-map pfbc-clear">';
-					}	
+					}
 
 					if(($i + 1) == $elementSize)
 						$map_element_last = true;
@@ -1151,11 +1158,11 @@ class form extends base {
 						$str .= ' <img id="' . $ele->tooltipID . '" src="' . $this->tooltipIcon . '" alt=""/>';
 
 					$str .= "</label>";
-				}	
+				}
 
 				/*Check the element's type and render the field accordinly.*/
 				$eleType = &$ele->attributes["type"];
-				
+
 				/*Add appropriate javascript event functions if hint is present.*/
 				if(in_array($eleType, array("text", "textarea", "date", "datetime", "time", "daterange", "colorpicker", "latlng", "email")) && !empty($ele->hint) && empty($ele->attributes["value"]))
 				{
@@ -1171,7 +1178,7 @@ class form extends base {
 						$ele->attributes["onblur"] = $hintBlurFunction;
 					else
 						$ele->attributes["onblur"] .= " " . $hintBlurFunction;
-					$this->hintExists = 1;	
+					$this->hintExists = 1;
 				}
 				elseif(!empty($ele->hint))
 					unset($ele->hint);
@@ -1184,13 +1191,13 @@ class form extends base {
 					{
 						$resetTypeTo = $eleType;
 						$eleType = "text";
-					}	
+					}
 
 					if(!empty($ele->attributes["class"]))
 						$ele->attributes["class"] .= " pfbc-textbox";
-					else	
+					else
 						$ele->attributes["class"] = "pfbc-textbox";
-						
+
 					$str .= "<input";
 					if(!empty($ele->attributes) && is_array($ele->attributes))
 					{
@@ -1199,7 +1206,7 @@ class form extends base {
 						{
 							if(in_array($key, $tmpAllowFieldArr))
 								$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-						}		
+						}
 					}
 					if(!empty($ele->disabled))
 						$str .= ' disabled="disabled"';
@@ -1208,7 +1215,7 @@ class form extends base {
 					$str .= "/>";
 					if($focus)
 						$this->focusElement = $ele->attributes["name"];
-					
+
 					/*Now that <input> tag his been rendered, change type attribute back appropriately.*/
 					if(isset($resetTypeTo))
 					{
@@ -1220,7 +1227,7 @@ class form extends base {
 				{
 					if(!empty($ele->attributes["class"]))
 						$ele->attributes["class"] .= " pfbc-file";
-					else	
+					else
 						$ele->attributes["class"] = "pfbc-file";
 
 					$str .= "<input";
@@ -1231,7 +1238,7 @@ class form extends base {
 						{
 							if(in_array($key, $tmpAllowFieldArr))
 								$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-						}		
+						}
 					}
 					if(!empty($ele->disabled))
 						$str .= ' disabled="disabled"';
@@ -1280,7 +1287,7 @@ class form extends base {
 						$this->focusElement = $ele->attributes["name"];
 
 					if($eleType == "ckeditor")
-						$this->ckeditorIDArr[$ele->attributes["id"]] = $ele; 
+						$this->ckeditorIDArr[$ele->attributes["id"]] = $ele;
 				}
 				elseif($eleType == "select" || $eleType == "rating")
 				{
@@ -1358,7 +1365,7 @@ class form extends base {
 							$str .= '<div class="pfbc-radio';
 							if($o == 0)
 								$str .= ' pfbc-radio-first';
-							elseif($o + 1 == $optionSize)	
+							elseif($o + 1 == $optionSize)
 								$str .= ' pfbc-radio-last';
 							$str .= '"><input';
 							$tmpAllowFieldArr = $this->allowedFields["radio"];
@@ -1368,16 +1375,16 @@ class form extends base {
 								{
 									if(in_array($key, $tmpAllowFieldArr))
 										$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-								}		
+								}
 							}
-							$str .= ' id="' . str_replace('"', '&quot;', $ele->attributes["name"]) . $o . '" value="' . str_replace('"', '&quot;', $ele->options[$o]->value) . '"';		
+							$str .= ' id="' . str_replace('"', '&quot;', $ele->attributes["name"]) . $o . '" value="' . str_replace('"', '&quot;', $ele->options[$o]->value) . '"';
 							if($ele->attributes["value"] == $ele->options[$o]->value)
 								$str .= ' checked="checked"';
 							if(!empty($ele->disabled))
 								$str .= ' disabled="disabled"';
 							$str .= '/>';
 							$str .= '<label for="' . str_replace('"', '&quot;', $ele->attributes["name"]) . $o . '" style="cursor: pointer;">' . $ele->options[$o]->text . "</label></div>";
-						}	
+						}
 
 						if(!empty($ele->clear))
 							$str .= '<div style="clear: both;"></div>';
@@ -1403,7 +1410,7 @@ class form extends base {
 							$str .= '<div class="pfbc-checkbox';
 							if($o == 0)
 								$str .= ' pfbc-checkbox-first';
-							elseif($o + 1 == $optionSize)	
+							elseif($o + 1 == $optionSize)
 								$str .= ' pfbc-checkbox-last';
 							$str .= '"><input';
 							if(!empty($ele->attributes) && is_array($ele->attributes))
@@ -1413,10 +1420,10 @@ class form extends base {
 								{
 									if(in_array($key, $tmpAllowFieldArr))
 										$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-								}		
+								}
 							}
 							$tmpID = str_replace(array('"', '[]'), array('&quot;', '-'), $ele->attributes["name"]) . $o;
-							$str .= ' id="' . $tmpID . '" value="' . str_replace('"', '&quot;', $ele->options[$o]->value) . '"';		
+							$str .= ' id="' . $tmpID . '" value="' . str_replace('"', '&quot;', $ele->options[$o]->value) . '"';
 
 							/*For checkboxes, the value parameter can be an array - which allows for multiple boxes to be checked by default.*/
 							if((!is_array($ele->attributes["value"]) && $ele->attributes["value"] == $ele->options[$o]->value) || (is_array($ele->attributes["value"]) && in_array($ele->options[$o]->value, $ele->attributes["value"], true)))
@@ -1425,7 +1432,7 @@ class form extends base {
 								$str .= ' disabled="disabled"';
 							$str .= '/>';
 							$str .= '<label for="' . $tmpID . '" style="cursor: pointer;">' . $ele->options[$o]->text . '</label></div>';
-						}	
+						}
 
 						if(!empty($ele->clear))
 							$str .= '<div style="clear: both;"></div>';
@@ -1456,7 +1463,7 @@ class form extends base {
 									$opt = new option();
 									$opt->setAttributes(array("value" => $key, "text" => $value));
 									$ele->options[$index] = $opt;
-								}	
+								}
 							}
 						}
 
@@ -1466,7 +1473,7 @@ class form extends base {
 						{
 							$str .= $this->indent("\t");
 							$str .= '<li class="ui-state-default" style="margin: 3px 0; padding-left: 0.5em; font-size: 1em; height: 2em; line-height: 2em;"><input type="hidden" name="' . str_replace('"', '&quot;', $ele->attributes["name"]) . '" value="' . str_replace('"', '&quot;', $ele->options[$o]->value) . '"/>' . $ele->options[$o]->text . '</li>';
-						}	
+						}
 						$str .= $this->indent();
 						$str .= "</ul>";
 					}
@@ -1475,9 +1482,9 @@ class form extends base {
 				{
 					if(!empty($ele->attributes["class"]))
 						$ele->attributes["class"] .= " pfbc-textbox";
-					else	
+					else
 						$ele->attributes["class"] = "pfbc-textbox";
-					
+
 					if(empty($ele->attributes["style"]))
 						$ele->attributes["style"] = "";
 
@@ -1498,12 +1505,12 @@ class form extends base {
 						{
 							if(in_array($key, $tmpAllowFieldArr))
 								$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-						}	
+						}
 					}
 					$str .= ' value="';
 					if(!empty($ele->hint))
 						$str .= $ele->hint;
-					elseif(!empty($ele->attributes["value"]) && is_array($ele->attributes["value"]))	
+					elseif(!empty($ele->attributes["value"]) && is_array($ele->attributes["value"]))
 						$str .=  "Latitude: " . $ele->attributes["value"][0] . ", Longitude: " . $ele->attributes["value"][1];
 					$str .= '"';
 
@@ -1527,7 +1534,7 @@ class form extends base {
 					$str .= '<div id="' . $latlngID . '_clearDiv" style="';
 					if(empty($ele->attributes["value"]) || !is_array($ele->attributes["value"]))
 						$str .= 'display: none;';
-					$str .= '"><a href="javascript: clearLatLng_' . $this->attributes["id"] . '(\'' . $latlngID . '\', \'' . htmlentities($ele->attributes["name"], ENT_QUOTES) . '\');" class="pfbc-link">Clear Latitude/Longitude</a></div>';	
+					$str .= '"><a href="javascript: clearLatLng_' . $this->attributes["id"] . '(\'' . $latlngID . '\', \'' . htmlentities($ele->attributes["name"], ENT_QUOTES) . '\');" class="pfbc-link">Clear Latitude/Longitude</a></div>';
 
 					$this->latlngIDArr[$ele->attributes["id"]] = $ele;
 				}
@@ -1553,7 +1560,7 @@ class form extends base {
 							$str .= '<div class="pfbc-checkbox';
 							if($o == 0)
 								$str .= ' pfbc-checkbox-first';
-							elseif($o + 1 == $optionSize)	
+							elseif($o + 1 == $optionSize)
 								$str .= ' pfbc-checkbox-last';
 							$str .= '"><input';
 							if(!empty($ele->attributes) && is_array($ele->attributes))
@@ -1563,7 +1570,7 @@ class form extends base {
 								{
 									if(in_array($key, $tmpAllowFieldArr))
 										$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-								}		
+								}
 							}
 
 							$tmpID = str_replace(array('"', '[]'), array('&quot;', '-'), $ele->attributes["name"]) . $o;
@@ -1574,12 +1581,12 @@ class form extends base {
 							{
 								$str .= ' checked="checked"';
 								$sortLIArr[$ele->options[$o]->value] = '<li id="' . str_replace('"', '&quot;', $ele->attributes["id"]) . $o . '" class="ui-state-default" style="margin: 3px 0; padding-left: 0.5em; font-size: 1em; height: 2em; line-height: 2em;"><input type="hidden" name="' . str_replace('"', '&quot;', $ele->attributes["name"]) . '" value="' . str_replace('"', '&quot;', $ele->options[$o]->value) . '"/></span>' . $ele->options[$o]->text . '</li>' . "\n";
-							}	
+							}
 							if(!empty($ele->disabled))
 								$str .= ' disabled="disabled"';
 							$str .= '/>';
 							$str .= '<label for="' . $tmpID . '" style="cursor: pointer;">' . $ele->options[$o]->text . '</label></div>';
-						}	
+						}
 
 						if(!empty($ele->clear))
 							$str .= '<div style="clear: both;"></div>';
@@ -1597,7 +1604,7 @@ class form extends base {
 									if(isset($sortLIArr[$ele->attributes["value"][$li]]))
 									{
 										$str .= $this->indent("\t");
-										$str .= $sortLIArr[$ele->attributes["value"][$li]];	
+										$str .= $sortLIArr[$ele->attributes["value"][$li]];
 									}
 								}
 							}
@@ -1608,7 +1615,7 @@ class form extends base {
 									$str .= $this->indent("\t");
 									$str .= $sortLIArr[$ele->attributes["value"]];
 								}
-							}		
+							}
 						}
 						$str .= $this->indent("\t");
 						$str .= "<li style='display: none'>&nbsp;</li>" . $this->indent() . "</ul>";
@@ -1622,7 +1629,7 @@ class form extends base {
 						$ele->attributes["value"] = "0";
 					if(is_array($ele->attributes["value"]) && sizeof($ele->attributes["value"]) == 1)
 						$ele->attributes["value"] = $ele->attributes["value"][0];
-					
+
 					$str .= '<div id="' . $ele->attributes["id"] . '" style="font-size: 12px !important; margin: 2px 0;';
 					if($ele->orientation == "vertical" && !empty($ele->height))
 						$str .= ' height: ' . $ele->height;
@@ -1636,7 +1643,7 @@ class form extends base {
 						{
 							sort($ele->attributes["value"]);
 							$str .= $ele->prefix . $ele->attributes["value"][0] . $ele->suffix . " - " . $ele->prefix . $ele->attributes["value"][1] . $ele->suffix;
-						}	
+						}
 						else
 							$str .= $ele->prefix . $ele->attributes["value"] . $ele->suffix;
 						$str .= '</div>';
@@ -1661,7 +1668,7 @@ class form extends base {
 
 				if(!empty($ele->postHTML))
 					$str .= $this->indent() . $ele->postHTML;
-				
+
 				$str .= "\n\t";
 				if(!empty($this->map))
 					$str .= "\t";
@@ -1687,10 +1694,10 @@ class form extends base {
 						++$mapIndex;
 						$mapCount = 0;
 						$str .= "\n\t</div>";
-					}	
+					}
 				}
 				$focus = false;
-			}	
+			}
 		}
 
 		/*This javascript section loads all required js and css files needed for a specific form.  CSS files are loaded into the <head> tag with javascript.*/
@@ -1722,7 +1729,7 @@ STR;
 				$str .= <<<STR
 		<script type="text/javascript" src="{$this->jsIncludesPath}/jquery/ui/jquery-ui.js"></script>
 STR;
-			}	
+			}
 		}
 
 		if(!empty($this->tooltipIDArr) && empty($this->preventQTipLoad))
@@ -1730,7 +1737,7 @@ STR;
 			$str .= <<<STR
 		<script type="text/javascript" src="{$this->jsIncludesPath}/jquery/plugins/qtip/jquery.qtip.js"></script>
 STR;
-		}	
+		}
 
 		if(!empty($this->jqueryStarRatingIDArr))
 		{
@@ -1744,7 +1751,7 @@ STR;
 			$str .= <<<STR
 		<script type="text/javascript" src="{$this->jsIncludesPath}/jquery/ui/timepicker.js"></script>
 STR;
-		}	
+		}
 
 		if(!empty($this->jqueryTimeIDArr))
 		{
@@ -1760,7 +1767,7 @@ STR;
 		</script>
 		<script type="text/javascript" src="{$this->jsIncludesPath}/jquery/plugins/timepicker/km.timepicker.js"></script>
 STR;
-		}	
+		}
 
 		if(!empty($this->jqueryDateRangeIDArr))
 		{
@@ -1776,7 +1783,7 @@ STR;
 		</script>
 		<script type="text/javascript" src="{$this->jsIncludesPath}/jquery/ui/daterangepicker.jQuery.js"></script>
 STR;
-		}	
+		}
 
 		if(!empty($this->jqueryColorIDArr))
 		{
@@ -1806,7 +1813,7 @@ STR;
 				$str .= <<<STR
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 STR;
-			}	
+			}
 		}
 
 		if(!empty($this->tinymceIDArr) && empty($this->preventTinyMCELoad))
@@ -1817,11 +1824,11 @@ STR;
 		}
 
 		if(!empty($this->ckeditorIDArr) && empty($this->preventCKEditorLoad))
-		{		
+		{
 				$str .= <<<STR
 		<script type="text/javascript" src="{$this->jsIncludesPath}/ckeditor/ckeditor.js"></script>
 STR;
-		}	
+		}
 
 		if(!empty($this->captchaID) && empty($this->preventCaptchaLoad))
 		{
@@ -1833,8 +1840,9 @@ STR;
 		/*Serialize the form and store it in a session array.  This variable will be unserialized and used within the validate() method.*/
 		$_SESSION["pfbc-instances"][$this->attributes["id"]] = serialize($this);
 
-                if($this->generateExternalResources == True)
+                if(empty($this->generateInlineResources) || $this->generateInlineResources == False)
 		{
+
 			$session_param = "";
 			$session_name = session_name();
 			if($session_name != "PHPSESSID")
@@ -1842,6 +1850,7 @@ STR;
 
 			$str .= <<<STR
 		<script type="text/javascript">
+                        //<![CDATA[
 			var css = document.createElement('link');
 			css.rel = 'stylesheet';
 			css.type = 'text/css';
@@ -1852,6 +1861,7 @@ STR;
 			script.type = 'text/javascript';
 			script.src = '{$this->jsIncludesPath}/js.php?id={$this->attributes["id"]}$session_param';
 			head.appendChild(script);
+                        //]]>
 		</script>
 
 STR;
@@ -1890,7 +1900,7 @@ STR;
 							{
 								if(in_array($key, $tmpAllowFieldArr))
 									$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-							}		
+							}
 						}
 						$str .= ">";
 					}
@@ -1898,7 +1908,7 @@ STR;
 						$str .= "\n\t\t";
 
 
-					/*The phpFunction parameter was included to give the developer the flexibility to use any custom button generation function 
+					/*The phpFunction parameter was included to give the developer the flexibility to use any custom button generation function
 					they might currently use in their development environment.*/
 					if(!empty($this->buttons[$i]->phpFunction))
 					{
@@ -1913,10 +1923,10 @@ STR;
 									if($p != 0)
 										$execStr .= ",";
 
-									if(is_string($this->buttons[$i]->phpParams[$p]))	
+									if(is_string($this->buttons[$i]->phpParams[$p]))
 										$execStr .= '"' . $this->buttons[$i]->phpParams[$p] . '"';
-									else	
-										$execStr .= $this->buttons[$i]->phpParams[$p];	
+									else
+										$execStr .= $this->buttons[$i]->phpParams[$p];
 								}
 							}
 							else
@@ -1935,7 +1945,7 @@ STR;
 							{
 								if(in_array($key, $tmpAllowFieldArr))
 									$str .= ' ' . $key . '="' . str_replace('"', '&quot;', $value) . '"';
-							}		
+							}
 						}
 						$str .= "/>";
 					}
@@ -1975,7 +1985,7 @@ STR;
 				$eleLabel = str_replace('"', '&quot;', strip_tags($ele->label));
 				if(substr($eleLabel, -1) == ":")
 					$eleLabel = substr($eleLabel, 0, -1);
-			}	
+			}
 			else
 				$eleLabel = str_replace('"', '&quot;', strip_tags($ele->attributes["name"]));
 			$alertMsg = $this->jsErrorFunction . '("' . str_replace(array("[LABEL]", '"'), array($eleLabel, '&quot;'), $this->errorMsgFormat) . '");';
@@ -1995,7 +2005,7 @@ STR;
 		var is_checked = false;
 
 STR;
-				}	
+				}
 				$str .= <<<STR
 		for(i = 0; i < formObj.elements["$eleName"].length; i++) {
 			if(formObj.elements["$eleName"][i].checked) {
@@ -2007,14 +2017,14 @@ STR;
 				form_data += "&$eleName=" + escape(formObj.elements["$eleName"][i].value);
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
 				is_checked = true;
 
 STR;
-				}	
+				}
 				$str .= <<<STR
 			}
 		}
@@ -2041,7 +2051,7 @@ STR;
 			form_data += "&$eleName=" + escape(formObj.elements["$eleName"].value);
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
@@ -2069,8 +2079,8 @@ STR;
 		var is_checked = false;
 
 STR;
-				}	
-							
+				}
+
 				$str .= <<<STR
 		for(i = 0; i < formObj.elements["$eleName"].length; i++) {
 			if(formObj.elements["$eleName"][i].checked) {
@@ -2082,17 +2092,17 @@ STR;
 				form_data += "&$eleName=" + escape(formObj.elements["$eleName"][i].value);
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
 				is_checked = true;
 
 STR;
-				}	
+				}
 				$str .= <<<STR
 			}
-		}		
+		}
 
 STR;
 				if(!empty($ele->required))
@@ -2117,7 +2127,7 @@ STR;
 			form_data += "&$eleName=" + escape(formObj.elements["$eleName"].value);
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
@@ -2144,7 +2154,7 @@ STR;
 		form_data += formObj.elements["$eleName"].value;
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
@@ -2165,7 +2175,7 @@ STR;
 	form_data += "&$eleName=" + escape(formObj.elements["$eleName"].value);
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
@@ -2187,7 +2197,7 @@ STR;
 		form_data += "&$eleName=" + escape(formObj.elements["$eleName"].value);
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
@@ -2212,29 +2222,29 @@ STR;
 		form_data += "&$eleName=" + escape(formObj.elements["$eleName"].value);
 
 STR;
-				}	
+				}
 			}
 			elseif($eleType == "captcha")
 			{
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
-	if(formObj.elements["recaptcha_response_field"].value == "") {		
+	if(formObj.elements["recaptcha_response_field"].value == "") {
 		$alertMsg
 		formObj.elements["recaptcha_response_field"].focus();
 		return false;
-	}	
+	}
 
 STR;
 				}
 				if(!empty($this->ajax))
 				{
 					$str .= <<<STR
-	form_data += "&recaptcha_challenge_field=" + escape(Recaptcha.get_challenge());		
+	form_data += "&recaptcha_challenge_field=" + escape(Recaptcha.get_challenge());
 	form_data += "&recaptcha_response_field=" + escape(Recaptcha.get_response());
 
 STR;
-				}	
+				}
 			}
 			elseif($eleType == "webeditor")
 			{
@@ -2244,7 +2254,7 @@ STR;
 	form_data += "&$eleName=" + escape(tinyMCE.get("$eleId").getContent());
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
@@ -2265,7 +2275,7 @@ STR;
 	form_data += "&$eleName=" + escape(CKEDITOR.instances.$eleId.getData());
 
 STR;
-				}	
+				}
 				if(!empty($ele->required))
 				{
 					$str .= <<<STR
@@ -2305,10 +2315,10 @@ STR;
 	if(!formObj.elements["$eleName"]) {
 		$alertMsg
 		return false;
-	}	
+	}
 
 STR;
-				}	
+				}
 			}
 			elseif(!empty($this->ajax) && $eleType == "sort")
 			{
@@ -2325,12 +2335,12 @@ STR;
 		}
 		else
 			form_data += "&$eleName=" + escape(formObj.elements["$eleName"].value);
-	}		
+	}
 
 STR;
-				
+
 			}
-				
+
 			if($eleType == "email")
 			{
 				$str .= <<<STR
@@ -2360,7 +2370,7 @@ STR;
 
 STR;
 			}
-		}	
+		}
 
 		/*Remove hints if they remain as form element values.*/
 		for($i = 0; $i < $elementSize; ++$i)
@@ -2375,7 +2385,7 @@ STR;
 
 STR;
 			}
-		}	
+		}
 		return $str;
 	}
 
@@ -2403,7 +2413,7 @@ STR;
 	$("#{$form->jqueryDateIDArr[$d]}").datepicker({ dateFormat: "{$form->jqueryDateFormat}", showButtonPanel: true });
 
 STR;
-					}	
+					}
 				}
 
 				if(!empty($form->jqueryDateTimeIDArr))
@@ -2415,7 +2425,7 @@ STR;
 	$("#{$form->jqueryDateTimeIDArr[$d]}").datepicker({ dateFormat: "{$form->jqueryDateFormat}", duration: "", showTime: true, constrainInput: false });
 
 STR;
-					}	
+					}
 				}
 
 				if(!empty($form->jqueryTimeIDArr))
@@ -2454,7 +2464,7 @@ STR;
  });
 
 STR;
-					}	
+					}
 				}
 
 				if(!empty($form->jqueryDateRangeIDArr))
@@ -2466,7 +2476,7 @@ STR;
 	$("#{$form->jqueryDateRangeIDArr[$d]}").daterangepicker({ dateFormat: "{$form->jqueryDateFormat}" });
 
 STR;
-					}	
+					}
 				}
 
 				if(!empty($form->jquerySortIDArr))
@@ -2479,7 +2489,7 @@ STR;
 	$("#{$form->jquerySortIDArr[$s]}").disableSelection();
 
 STR;
-					}	
+					}
 				}
 
 				/*For more information on qtip, visit http://craigsworks.com/projects/qtip/.*/
@@ -2501,9 +2511,9 @@ STR;
 							$str .= <<<STR
 , color: "{$form->tooltipBorderColor}"
 STR;
-						}	
+						}
 						$str .= <<<STR
-} 
+}
 STR;
 						if(!empty($tooltipEle->tooltipWidth))
 						{
@@ -2518,7 +2528,7 @@ STR;
 }, position: { corner: { target: "topRight", tooltip: "bottomLeft" } } });
 
 STR;
-					}	
+					}
 				}
 
 				/*For more information on the jQuery UI slider, visit http://jqueryui.com/demos/slider/.*/
@@ -2537,22 +2547,22 @@ STR;
 						if(is_array($slider->attributes["value"]))
 						{
 							$str .= <<<STR
-		range: true, 
+		range: true,
 		values: [{$slider->attributes["value"][0]}, {$slider->attributes["value"][1]}],
 
 STR;
-						}	
+						}
 						else
 						{
 							$str .= <<<STR
-		range: "min", 
+		range: "min",
 		value: {$slider->attributes["value"]},
 
 STR;
-						}	
+						}
 						$str .= <<<STR
-		min: {$slider->min}, 
-		max: {$slider->max}, 
+		min: {$slider->min},
+		max: {$slider->max},
 		orientation: "{$slider->orientation}",
 
 STR;
@@ -2562,7 +2572,7 @@ STR;
 		step: {$slider->snapIncrement},
 
 STR;
-						}	
+						}
 						if(is_array($slider->attributes["value"]))
 						{
 							$str .= <<<STR
@@ -2575,13 +2585,13 @@ STR;
 			$("#{$sliderKeys[$s]}_display").text("{$slider->prefix}" + ui.values[0] + "{$slider->suffix} - {$slider->prefix}" + ui.values[1] + "{$slider->suffix}");
 
 STR;
-							}	
+							}
 							$str .= <<<STR
 			document.getElementById("{$this->attributes["id"]}").elements["$sliderName"][0].value = ui.values[0]; document.getElementById("{$this->attributes["id"]}").elements["$sliderName"][1].value = ui.values[1];
-		}	
+		}
 
 STR;
-						}	
+						}
 						else
 						{
 							$str .= <<<STR
@@ -2594,13 +2604,13 @@ STR;
 			$("#{$slider->attributes["id"]}_display").text("{$slider->prefix}" + ui.value + "{$slider->suffix}");
 
 STR;
-							}	
+							}
 							$str .= <<<STR
 			document.getElementById("{$this->attributes["id"]}").elements["$sliderName"].value = ui.value;
 		}
 
 STR;
-						}	
+						}
 						$str .= <<<STR
 	});
 
@@ -2626,21 +2636,21 @@ STR;
 		captionEl: $("#{$ratingKeys[$r]}_caption"),
 
 STR;
-						}	
+						}
 						if(!empty($rating->hideCancel))
 						{
 							$str .= <<<STR
 		cancelShow: false,
 
 STR;
-						}	
+						}
 						$str .= <<<STR
-		inputType: "select", 
-		cancelValue: "" 
+		inputType: "select",
+		cancelValue: ""
 	});
 
 STR;
-					}	
+					}
 				}
 
 				/*For more information on the jQuery colorpicker plugin, visit http://plugins.jquery.com/project/color_picker.*/
@@ -2650,28 +2660,28 @@ STR;
 					for($c = 0; $c < $colorSize; ++$c)
 					{
 						$str .= <<<STR
-	$("#{$form->jqueryColorIDArr[$c]}").ColorPicker({	
-		onSubmit: function(hsb, hex, rgb, el) { 
-			$(el).val(hex); 
-			$(el).ColorPickerHide(); 
-		}, 
-		onBeforeShow: function() { 
-			if(this.value != "Click to Select Color..." && this.value != "") 
-				$(this).ColorPickerSetColor(this.value); 
-		} 
-	}).bind("keyup", function(){ 
-		$(this).ColorPickerSetColor(this.value); 
+	$("#{$form->jqueryColorIDArr[$c]}").ColorPicker({
+		onSubmit: function(hsb, hex, rgb, el) {
+			$(el).val(hex);
+			$(el).ColorPickerHide();
+		},
+		onBeforeShow: function() {
+			if(this.value != "Click to Select Color..." && this.value != "")
+				$(this).ColorPickerSetColor(this.value);
+		}
+	}).bind("keyup", function(){
+		$(this).ColorPickerSetColor(this.value);
 	});
 
 STR;
-					}	
+					}
 				}
 
 					$str .= <<<STR
 });
 
 STR;
-			}	
+			}
 
 			if(!empty($form->latlngIDArr))
 			{
@@ -2714,15 +2724,15 @@ STR;
 							$latlngZoom = 9;
 						else
 							$latlngZoom = $latlng->zoom;
-					}		
-					else	
+					}
+					else
 					{
 						$latlngCenter = $form->latlngDefaultLocation;
 						if(empty($latlng->zoom))
 							$latlngZoom = 5;
 						else
 							$latlngZoom = $latlng->zoom;
-					}	
+					}
 
 				$str .= <<<STR
 	geocoder_$latlngID = new google.maps.Geocoder();
@@ -2737,7 +2747,7 @@ STR;
 		var lng = latlng.lng();
 		document.getElementById("$latlngForm").elements["$latlngName"].value = "Latitude: " + lat.toFixed(3) + ", Longitude: " + lng.toFixed(3);
 		document.getElementById("{$latlngID}_clearDiv").style.display = "block";
-	});	
+	});
 
 STR;
 				}
@@ -2843,7 +2853,7 @@ STR;
 					$ckeditorParamArr = array();
 					if(!empty($ckeditor->basic))
 						$ckeditorParamArr[] = 'toolbar: "Basic"';
-					if(!empty($form->ckeditorCustomConfig))	
+					if(!empty($form->ckeditorCustomConfig))
 						$ckeditorParamArr[] = 'customConfig: "' . $form->ckeditorCustomConfig . '"';
 					if(!empty($form->ckeditorLang))
 						$ckeditorParamArr[] = 'language: "' . $form->ckeditorLang . '"';
@@ -2856,13 +2866,13 @@ STR;
 						$str .= <<<STR
 , { $ckeditorParamStr }
 STR;
-					}	
+					}
 					$str .= <<<STR
 );
 
 STR;
 				}
-			}	
+			}
 
 			if(!empty($form->captchaID))
 			{
@@ -2890,7 +2900,7 @@ STR;
 			if(!empty($form->hasFormTag))
 			{
 				/*
-				If there are any required fields in the form or if this form is setup to utilize ajax, build a javascript 
+				If there are any required fields in the form or if this form is setup to utilize ajax, build a javascript
 				function for performing form validation before submission and/or for building and submitting a data string through ajax.
 				*/
 				if(!empty($form->checkform) || !empty($form->ajax) || !empty($form->captchaExists) || !empty($form->hintExists) || !empty($form->emailExists))
@@ -2901,7 +2911,7 @@ STR;
 var validemail_{$this->attributes["id"]};
 
 STR;
-					}	
+					}
 					$str .= <<<STR
 function pfbc_error_{$form->attributes["id"]}(errorMsg) {
 	var error = document.createElement('div');
@@ -2924,7 +2934,7 @@ STR;
 	var form_data = "";
 
 STR;
-					}	
+					}
 
 					$str .= $form->jsCycleElements($form->elements);
 					if(!empty($form->bindRules))
@@ -2940,7 +2950,7 @@ STR;
 									$str .= <<<STR
 	if({$form->bindRules[$bindRuleKeys[$b]][1]}) {
 STR;
-								}	
+								}
 								$str .= $form->jsCycleElements($form->bindRules[$bindRuleKeys[$b]][0]->elements);
 								if(!empty($form->bindRules[$bindRuleKeys[$b]][1]))
 								{
@@ -2948,11 +2958,11 @@ STR;
 	}
 
 STR;
-								}	
+								}
 							}
 						}
 					}
-						
+
 					if(!empty($form->ajax))
 					{
 						$str .= <<<STR
@@ -2983,7 +2993,7 @@ STR;
 						{$form->ajaxCallback}(responseMsg);
 
 STR;
-						}	
+						}
 						else
 						{
 							$str .= <<<STR
@@ -2991,7 +3001,7 @@ STR;
 				{$form->jsErrorFunction}(responseMsg);
 
 STR;
-						}		
+						}
 						$str .= <<<STR
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) { {$form->jsErrorFunction}(XMLHttpRequest.responseText); }
@@ -2999,14 +3009,14 @@ STR;
 	return false;
 
 STR;
-					}	
-					else	
+					}
+					else
 					{
 						$str .= <<<STR
 	return true;
 
 STR;
-					}	
+					}
 					$str .= <<<STR
 }
 
@@ -3024,14 +3034,14 @@ STR;
 setTimeout("if(tinyMCE.get(\"{$form->focusElement}\")) tinyMCE.get(\"{$form->focusElement}\").focus();", 1000);
 
 STR;
-					}	
+					}
 					elseif(!empty($form->ckeditorIDArr) && is_array($form->ckeditorIDArr) && array_key_exists($form->focusElement, $form->ckeditorIDArr))
 					{
 						$str .= <<<STR
 setTimeout("CKEDITOR.instances.{$form->focusElement}.focus();", 1000);
 STR;
 
-					}	
+					}
 					else
 					{
 						/*Any fields with multiple options such as radio button, checkboxes, etc. are handled accordingly.*/
@@ -3042,10 +3052,10 @@ else
 	document.getElementById("{$this->attributes["id"]}").elements["{$form->focusElement}"].focus();
 
 STR;
-					}		
+					}
 				}
-			}	
-		}	
+			}
+		}
 
 		if(!$returnString)
 			echo($str);
@@ -3074,7 +3084,7 @@ $id .pfbc-clear:after {
 	visibility: hidden;
 	height: 0;
 	content: ":)";
-}	
+}
 $id .pfbc-label {
 	display: block;
 }
@@ -3082,7 +3092,7 @@ $id .pfbc-buttons {
 	text-align: right;
 }
 $id .pfbc-required {
-	color: #990000; 
+	color: #990000;
 }
 $id .pfbc-element {
 	padding-bottom: 5px;
@@ -3096,7 +3106,7 @@ STR;
 					{
 						$formWidth = substr($form->attributes["width"], 0, -1);
 						$suffix = "%";
-					}	
+					}
 					elseif(substr($form->attributes["width"], -2) == "px")
 					{
 						$formWidth = substr($form->attributes["width"], 0, -2);
@@ -3106,7 +3116,7 @@ STR;
 					{
 						$formWidth = $form->attributes["width"];
 						$suffix = "px";
-					}	
+					}
 					$str .= <<<STR
 $id .pfbc-main {
 	width: {$formWidth}$suffix;
@@ -3129,18 +3139,18 @@ STR;
 							$textboxWidth = $elementWidth - 6;
 							$textareaWidth = $elementWidth - 2;
 							$selectWidth = $elementWidth;
-						}	
+						}
 						else
 						{
 							$elementWidth = number_format(((100 - ($form->mapMargin * 2 * ($mapVals[$m] - 1)))  / $mapVals[$m]), 2, ".", "");
 							$textboxWidth = 98;
 							$textareaWidth = 98;
 							$selectWidth = 98;
-						}	
-							
+						}
+
 						$str .= <<<STR
 $id .pfbc-map-columns-{$mapVals[$m]} {
-	float: left; 
+	float: left;
 	width: {$elementWidth}$suffix;
 }
 $id .pfbc-map-columns-{$mapVals[$m]} .pfbc-textbox {
@@ -3207,7 +3217,7 @@ STR;
 .ui-datepicker-div, .ui-datepicker-inline, #ui-datepicker-div { font-size: 1em !important; }
 
 STR;
-			}	
+			}
 
 			if(!empty($form->jquerySliderIDArr))
 			{
@@ -3215,7 +3225,7 @@ STR;
 .ui-slider-handle { cursor: pointer !important; }
 
 STR;
-			}	
+			}
 
 			if(!empty($form->jqueryStarRatingIDArr))
 			{
@@ -3271,7 +3281,7 @@ cursor: default !important;
 
 STR;
 			}
-		}	
+		}
 
 		if(!$returnString)
 			echo($str);
@@ -3289,8 +3299,8 @@ STR;
 	}
 
 	/*
-	This function validates all required fields.  If a captcha field is found, it is validated as well.  This function returns 
-	true if the form successfully passes validation or false if errors were found.  If the form does return false, the errorMsg 
+	This function validates all required fields.  If a captcha field is found, it is validated as well.  This function returns
+	true if the form successfully passes validation or false if errors were found.  If the form does return false, the errorMsg
 	variable will be populated with a human readable error message that can be displayed to the user upon redirect if desired.
 	*/
 	public function validate()
@@ -3323,9 +3333,9 @@ STR;
 					{
 						if(empty($form->bindRules[$bindRuleKeys[$b]][2]) || (eval("if(" . $form->bindRules[$bindRuleKeys[$b]][2] . ") return true; else return false;")))
 							$this->buildSessionValues($form->bindRules[$bindRuleKeys[$b]][0], $referenceValues);
-					}		
-				}	
-			}	
+					}
+				}
+			}
 
 			/*Cycle through the form's required elements to ensure they are valid.*/
 			if(!$this->phpCycleElements($form->elements, $referenceValues, $form))
@@ -3342,7 +3352,7 @@ STR;
 						{
 							if(!$this->phpCycleElements($form->bindRules[$bindRuleKeys[$b]][0]->elements, $referenceValues, $form))
 								return false;
-						}	
+						}
 					}
 				}
 			}
@@ -3363,9 +3373,9 @@ STR;
 							if(!empty($_SESSION["pfbc-values"][$form->bindRules[$bindRuleKeys[$b]][0]->attributes["id"]]))
 								unset($_SESSION["pfbc-values"][$form->bindRules[$bindRuleKeys[$b]][0]->attributes["id"]]);
 						}
-					}	
-				}	
-			}	
+					}
+				}
+			}
 			return true;
 		}
 		else
@@ -3395,7 +3405,7 @@ STR;
 				}
 				else
 					$_SESSION["pfbc-values"][$form->attributes["id"]][$eleName] = stripslashes($referenceValues[$eleName]);
-			}	
+			}
 		}
 
 		if(array_key_exists("recaptcha_challenge_field", $_SESSION["pfbc-values"][$form->attributes["id"]]))
@@ -3449,7 +3459,7 @@ STR;
 				{
 					$this->errorMsg = str_replace("[LABEL]", $ele->label, $form->errorMsgFormat);
 					return false;
-				}	
+				}
 			}
 
 			if($ele->attributes["type"] == "email" && !empty($referenceValues[$ele->attributes["name"]]))
@@ -3460,11 +3470,11 @@ STR;
 				{
 					$this->errorMsg = str_replace("[LABEL]", $ele->label, $form->emailErrorMsgFormat);
 					return false;
-				}	
+				}
 			}
 		}
 		return true;
-	}	
+	}
 
 	/*This function sets the referenceValues variables which can be used to pre-fill form fields.  This function needs to be called before the render function.*/
 	public function setReferenceValues($ref)
@@ -3508,7 +3518,7 @@ class element extends base {
 	public $hideJump;					/*Will hide the textbox for location jump functionality.*/
 
 	/*slider specific fields*/
-	public $min;						/*Controls lowest value of slider.*/ 
+	public $min;						/*Controls lowest value of slider.*/
 	public $max;						/*Controls highest value of slider.*/
 	public $snapIncrement;				/*Controls incremental step of slider.*/
 	public $orientation;				/*Defaults to horizontal but can be set to vertical.*/
