@@ -96,4 +96,17 @@ Version 1.0.6 - _Released 05/12/2010_
   * Added datetime and time form elements
 
 Version 1.0.7 - _Unreleased_
-  * 
+  * Deprecated datetime and time form elements 
+  * Added jQuery UI theming functionality.  A new form attribute -
+jqueryUITheme - can now be used to customize the colors in the various
+jQuery UI elements that are integrated into the project.
+  * Added support for jQueryUI buttons
+  * Added min/max attributes for date and daterange elements which allows
+the window of available dates to be limited.  Also added numMonths
+attribute to date element allowing multiple months to be displayed at
+the same time.
+  * Added openFieldset/closeFieldset functions for supporting <fieldset>
+tags.  A new example file has been added demoing the fieldset functionality.
+  * Re-added support for the noBreak element attribute for rendering checkboxes/radio button horizontally on the same row as apposed to vertically on their own row.
+  * errorMsg form attribute can now be set prior to the render() function for displaying and error message returned from php validation.
+  
