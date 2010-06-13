@@ -91,3 +91,9 @@ Version 1.0.5 - _Released 05/10/2010_
   * Updated CKEditor to version 3.2.1
   * Replaced javascript error alerts with a more visually pleasing solution.
   * Updated qTip and Star Rating jQuery plugins to accomodate move to jQuery 1.4.2
+
+Version 1.0.6 - _Released 05/12/2010_
+  * Added datetime and time form elements
+
+Version 1.0.7 - _Unreleased_
+  * 
