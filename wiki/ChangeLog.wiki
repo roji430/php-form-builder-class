@@ -95,7 +95,7 @@ Version 1.0.5 - _Released 05/10/2010_
 Version 1.0.6 - _Released 05/12/2010_
   * Added datetime and time form elements
 
-Version 1.0.7 - _Unreleased_
+Version 1.0.7 - _Released 06/17/2010_
   * Deprecated datetime and time form elements 
   * Added jQuery UI theming functionality.  A new form attribute, jqueryUITheme, can now be used to customize the colors in the various jQuery UI elements that are integrated into the project.
   * Added support for jQueryUI buttons
