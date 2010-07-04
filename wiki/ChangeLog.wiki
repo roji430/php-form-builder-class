@@ -105,3 +105,7 @@ Version 1.0.7 - _Released 06/17/2010_
   * errorMsg form attribute can now be set prior to the render() function for displaying and error message returned from php validation.
   * Form/element attribute can now be assigned case insensitively.
   * Updated button rendering allowing the addButton() function to be used within the flow of form elements.
+
+Version 1.0.7 - _Unreleased_
+  * Improved how values of "" and 0 are handled in checkbox, radio, checksort, and select elements
+  * Updated layout example to include more demos of available form structures.
