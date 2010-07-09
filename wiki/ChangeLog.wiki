@@ -109,3 +109,4 @@ Version 1.0.7 - _Released 06/17/2010_
 Version 1.0.8 - _Unreleased_
   * Improved how values of "" and 0 are handled in checkbox, radio, checksort, and select elements
   * Updated layout example to include more demos of available form structures.
+  * Pull jQuery and jQueryUI javascript files from Google's ajax api libraries
