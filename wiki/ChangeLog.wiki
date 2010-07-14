@@ -110,3 +110,4 @@ Version 1.0.8 - _Unreleased_
   * Improved how values of "" and 0 are handled in checkbox, radio, checksort, and select elements
   * Updated layout example to include more demos of available form structures.
   * Pull jQuery and jQueryUI javascript files from Google's ajax api libraries
+  * jqueryOptions element attribute can now be used to pass supported jQuery options to form elements that leverage jQueryUI and other plugins.
