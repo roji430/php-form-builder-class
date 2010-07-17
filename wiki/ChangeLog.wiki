@@ -111,3 +111,4 @@ Version 1.0.8 - _Unreleased_
   * Updated layout example to include more demos of available form structures.
   * Pull jQuery and jQueryUI javascript files from Google's ajax api libraries
   * jqueryOptions element attribute can now be used to pass supported jQuery options to form elements that leverage jQueryUI and other plugins.
+  * Added labelWidth support for slider, captcha, sort, checksort, latlng, radio, and checkbox elements
