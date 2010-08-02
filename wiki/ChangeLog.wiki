@@ -121,3 +121,4 @@ Version 1.0.9 - _Unreleased_
   * Added jqueryUIButtons form attribute that can be used to render all buttons attached to a form with jQueryUI styling.
   * Replaced "$" with "jQuery" to prevent potential compatibility issues with other javascript libraries.
   * Many of the js/css includes are now rolled together in their appropriate js.php/css.php files.  Fewer http requests means fast page loads and will allow the form's css/structure to load more quickly.
+  * Replaced qTip with Poshy Tip for the form's tooltip functionality.
