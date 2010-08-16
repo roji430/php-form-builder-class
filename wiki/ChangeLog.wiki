@@ -122,3 +122,5 @@ Version 1.0.9 - _Unreleased_
   * Replaced "$" with "jQuery" to prevent potential compatibility issues with other javascript libraries.
   * Many of the js/css includes are now rolled together in their appropriate js.php/css.php files.  Fewer http requests means fast page loads and will allow the form's css/structure to load more quickly.
   * Replaced qTip with Poshy Tip for the form's tooltip functionality.
+  * Updated jQueryUI to version 1.8.4
+  * js.php file is now loaded asynchronously which frees up the browser to apply css more quickly.
