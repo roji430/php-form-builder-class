@@ -124,3 +124,5 @@ Version 1.0.9 - _Unreleased_
   * Replaced qTip with Poshy Tip for the form's tooltip functionality.
   * Updated jQueryUI to version 1.8.4
   * js.php file is now loaded asynchronously which frees up the browser to apply css more quickly.
+  * jQuery is leveraged for dynamically adjusting element's length based on padding and border.  Previously, border and padding were hardcoded in the default stylesheet.
+  * Example files have been re-styled.
