@@ -115,7 +115,7 @@ Version 1.0.8 - _Released 07/19/2010_
   * Improved https support.
   * Pull jQueryUI themes from Google's ajax api libraries
 
-Version 1.0.9 - _Unreleased_
+Version 1.0.9 - _Released 08/23/2010_
   * Updated TinyMCE to version 3.3.8
   * Updated CKEditor to version 3.3.1
   * Added jqueryUIButtons form attribute that can be used to render all buttons attached to a form with jQueryUI styling.
