@@ -126,3 +126,6 @@ Version 1.0.9 - _Released 08/23/2010_
   * js.php file is now loaded asynchronously which frees up the browser to apply css more quickly.
   * jQuery is leveraged for dynamically adjusting element's length based on padding and border.  Previously, border and padding were hardcoded in the default stylesheet.
   * Example files have been re-styled.
+
+Version 1.1.0 - _Unreleased_
+  * Added support for displaying multiple error messages above each appropriate form element.
