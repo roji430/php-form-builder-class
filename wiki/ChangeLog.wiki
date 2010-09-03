@@ -129,3 +129,5 @@ Version 1.0.9 - _Released 08/23/2010_
 
 Version 1.1.0 - _Unreleased_
   * Added support for displaying multiple error messages above each appropriate form element.
+  * Added two element attributes - integer and alphanumeric - for filtering a textbox's value as a user types as well as validating the input when submitted.  This functionality can be viewed in the newly added textbox validation example file.
+  * Added alternate option for building and displaying your forms by utilizing two new form functions - renderHead and renderBody.  An example will be included demoing this new feature.
