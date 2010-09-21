@@ -127,7 +127,7 @@ Version 1.0.9 - _Released 08/23/2010_
   * jQuery is leveraged for dynamically adjusting element's length based on padding and border.  Previously, border and padding were hardcoded in the default stylesheet.
   * Example files have been re-styled.
 
-Version 1.1.0 - _Unreleased_
+Version 1.1.0 - _Released 09/20/2010_
   * Added support for displaying multiple error messages above each appropriate form element.
   * Added two element attributes - integer and alphanumeric - for filtering a textbox's value as a user types as well as validating the input when submitted.  This functionality can be viewed in the newly added textbox validation example file.
   * Added alternate option for building and displaying your forms by utilizing two new form functions - renderHead and renderBody.  An example file titled "Synchronous Resource Loading" has been added demoing this functionality.
