@@ -130,10 +130,11 @@ Version 1.0.9 - _Released 08/23/2010_
 Version 1.1.0 - _Unreleased_
   * Added support for displaying multiple error messages above each appropriate form element.
   * Added two element attributes - integer and alphanumeric - for filtering a textbox's value as a user types as well as validating the input when submitted.  This functionality can be viewed in the newly added textbox validation example file.
-  * Added alternate option for building and displaying your forms by utilizing two new form functions - renderHead and renderBody.  An example will be included demoing this new feature.
+  * Added alternate option for building and displaying your forms by utilizing two new form functions - renderHead and renderBody.  An example file titled "Synchronous Resource Loading" has been added demoing this functionality.
   * Depricated ajaxDataType form attribute.
   * Depricated ajaxType form attribute.  The form tag's method is now used.
   * Depricated ajaxUrl form attribute.  The form tag's action is now used.
   * New validation example file replaces previous javascript, php, email, and textbox example files.
   * Added renderAjaxErrorResponse function to aid php validation when submitting a form via ajax.
   * Added errorDisplayOption for replacing inline validation above each element with an option for displaying each error at the top of the form.  This attribute is automatically set to 1 when using the mapping functionality.
+  * Moved the data used for the options of the addState and addCountry functions to external files making localization easier.
