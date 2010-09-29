@@ -138,3 +138,7 @@ Version 1.1.0 - _Released 09/20/2010_
   * Added renderAjaxErrorResponse function to aid php validation when submitting a form via ajax.
   * Added errorDisplayOption for replacing inline validation above each element with an option for displaying each error at the top of the form.  This attribute is automatically set to 1 when using the mapping functionality.
   * Moved the data used for the options of the addState and addCountry functions to external files making localization easier.
+
+Version 1.1.1 - _Unreleased_
+  * Added sendToGoogleSpreadsheet function for sending a form's submitted data directly to a Google Docs spreadsheet.  A new example file has been added demoing this functionality.
+  * Improved support for users with javascript disabled.
