@@ -142,3 +142,8 @@ Version 1.1.0 - _Released 09/20/2010_
 Version 1.1.1 - _Released 09/30/2010_
   * Added sendToGoogleSpreadsheet function for sending a form's submitted data directly to a Google Docs spreadsheet.  A new example file has been added demoing this functionality.
   * Improved support for users with javascript disabled.
+
+Version 1.1.2 - _Unreleased_
+  * Improved anti-bot/spam detection and prevention.
+  * Added support for emailing a form's submitted data using PHPMailer and Google's Gmail service via the new email function.  A new example - email.php -has been added demoing this functionality.
+  * Added processing section in the lower-left corner of the form to provide the user with visual feedback while their form is submitted.
