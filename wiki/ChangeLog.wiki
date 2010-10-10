@@ -146,4 +146,6 @@ Version 1.1.1 - _Released 09/30/2010_
 Version 1.1.2 - _Unreleased_
   * Improved anti-bot/spam detection and prevention.
   * Added support for emailing a form's submitted data using PHPMailer and Google's Gmail service via the new email function.  A new example - email.php -has been added demoing this functionality.
-  * Added processing section in the lower-left corner of the form to provide the user with visual feedback while their form is submitted.
+  * Added processing image/text in the lower-left corner of the form to provide the user with visual feedback while their form is submitted.
+  * Added new form attribute - jqueryNoConflict - to allow "$" alias to be used by other javascript libraries.
+  * Added Date/Time, IP Address, and Url to information that is sent via Google Spreadsheets API
