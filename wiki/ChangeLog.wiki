@@ -149,3 +149,11 @@ Version 1.1.2 - _Released 10/10/2010_
   * Added processing image/text in the lower-left corner of the form to provide the user with visual feedback while their form is submitted.
   * Added new form attribute - jqueryNoConflict - to allow "$" alias to be used by other javascript libraries.
   * Added Date/Time, IP Address, and Url to information that is sent via Google Spreadsheets API
+
+Version 1.1.3 - _Unreleased_
+  * Added two new form/element attributes - labelDisplayRight and labelPaddingLeft.  labelDisplayRight will render the label to the right of the its appropriate form element.  labelPaddingLeft is identical to labelPaddingRight except padding is applied to the left side of the label as apposed to the right.
+  * The includesPath form attribute has been deprecated.  jsIncludesPath and phpIncludesPath can now be applied in the form's setAttributes function.  phpIncludesPath is automatically set using php's __FILE__ constant.
+  * Moved email, element, and button class to external files in the includes directory.  Previously these classes were included in class.form.php.  Depricated the option class.
+  * Updated jQuery and jQueryUI to version 1.4.3 and 1.8.6 respectively.
+  * Added new element attribute - float - for applying float validation to textboxes.  Plus/minus signs are now allowed for integer validation.
+  * Added new form element type - expdate - for handling credit card expiration dates.
