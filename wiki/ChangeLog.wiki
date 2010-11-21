@@ -162,3 +162,7 @@ Version 1.1.3 - _11/17/2010_
   * Radio buttons, and checkboxes are now rendered in a table to better support word wrapping.
   * CSS on the sortable elements - sort, checksort - has been adjusted to better support word wrapping.
   * Added clear links below date, daterange, and color elements allowing the textbox's value to be cleared.
+
+Version 1.1.4 - _11/20/2010_
+  * Updated jQuery to 1.4.4
+  * Fix bug affecting css being applied to select boxes 
