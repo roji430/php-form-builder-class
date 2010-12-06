@@ -169,3 +169,6 @@ Version 1.1.4 - _11/20/2010_
 
 Version 1.1.5 - _Unreleased_
   * Fix bug causing reCAPTCHA's to disappear in Internet Explorer.
+  * Added optional second parameter - width - to the form class constructor allowing the form's width to be set without having to use the setAttributes function.
+  * Added optional parameter - clearSessionValues - to the validate function allowing developers to validate the form submission data without clearing the php session values used to auto-populate the form's elements when an error is found.
+  * Added new function - setError - for applying custom errors to specific elements.
