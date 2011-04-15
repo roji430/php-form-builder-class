@@ -34,6 +34,9 @@ CSS;
 	
 		if(!empty($this->labelRightAlign))
 			echo '#', $id, ' .pfbc-label { text-align: right; }';
+		
+		if(empty($this->labelPaddingTop) && !empty($this->style))
+			$this->labelPaddingTop = ".75em";
 
 		if(!empty($this->labelPaddingTop)) {
 			if(is_numeric($this->labelPaddingTop))

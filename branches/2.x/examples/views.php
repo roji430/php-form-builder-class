@@ -55,9 +55,7 @@ labelRightAlign.  Like the Standard view, only one element is allowed per row.</
 <?php
 $form = new PFBC\Form("layout_sidebyside", 300);
 $form->configure(array(
-	"view" => new PFBC\View\SideBySide(100, array(
-		"labelPaddingTop" => ".75em"
-	)),
+	"view" => new PFBC\View\SideBySide(100),
 	"prevent" => array("focus", "jQuery", "jQueryUI")
 ));
 $form->addElement(new PFBC\Element\Hidden("form", "layout_sidebyside"));
@@ -69,9 +67,7 @@ $form->render();
 echo '<pre>', highlight_string('<?php
 $form = new PFBC\Form("layout_sidebyside", 300);
 $form->configure(array(
-	"view" => new PFBC\View\SideBySide(100, array(
-		"labelPaddingTop" => ".75em"
-	))
+	"view" => new PFBC\View\SideBySide(100)
 ));
 $form->addElement(new PFBC\Element\Hidden("form", "layout_sidebyside"));
 $form->addElement(new PFBC\Element\Textbox("Username:", "Username"));
@@ -89,9 +85,7 @@ corresponding elements.</p>
 <?php
 $form = new PFBC\Form("layout_horizontal");
 $form->configure(array(
-	"view" => new PFBC\View\Horizontal(array(
-		"labelPaddingTop" => ".75em"
-	)),
+	"view" => new PFBC\View\Horizontal,
 	"prevent" => array("focus", "jQuery", "jQueryUI")
 ));
 $form->addElement(new PFBC\Element\Hidden("form", "layout_horizontal"));
@@ -103,9 +97,7 @@ $form->render();
 echo '<pre>', highlight_string('<?php
 $form = new PFBC\Form("layout_horizontal");
 $form->configure(array(
-	"view" => new PFBC\View\Horizontal(array(
-		"labelPaddingTop" => ".75em"
-	))
+	"view" => new PFBC\View\Horizontal
 ));
 $form->addElement(new PFBC\Element\Hidden("form", "layout_horizontal"));
 $form->addElement(new PFBC\Element\Textbox("Username:", "Username"));

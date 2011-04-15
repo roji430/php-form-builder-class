@@ -3,6 +3,7 @@ namespace PFBC;
 
 abstract class View extends Base {
 	private $form;
+	protected $style = 1;
 
 	public function __construct(array $properties = null) {
 		$this->configure($properties);
@@ -40,7 +41,8 @@ abstract class View extends Base {
 	public function renderCSS() {
 		$id = $this->getForm()->getId();
 
-		echo <<<CSS
+		if(!empty($this->style)) {
+			echo <<<CSS
 #$id .pfbc-label label { font-weight: bold; }
 #$id .pfbc-label em { font-size: .9em; color: #999; }
 #$id .pfbc-label strong { color: #990000; }
@@ -48,6 +50,7 @@ abstract class View extends Base {
 #$id .pfbc-textbox { height: 16px; }
 #$id .pfbc-select { height: 32px; }
 CSS;
+		}
 	}
 
 	public function renderJS() {}

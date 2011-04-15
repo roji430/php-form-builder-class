@@ -17,7 +17,12 @@ include("../header.php");
 ?>
 
 <h2 class="first">Ajax</h2>
-<p></p>
+<p>This project provides several properties/methods for facilitating ajax submissions.  To get started, you'll first need to set the ajax property in
+the form's configure method.  The ajaxCallback property can also be included in the configure method if you'd like a javascript function to called
+after the form's data has been submitted.  In the example belew a callback function has been set to extract the latitude/longitude information from a
+json response.  The validation process for an ajax submission also differs slightly from that of a standard submission.  If the form's isValid method 
+returns false, you will need to invoke the renderAjaxErrorResponse method, which returns a json response containing the appropriateerror messages.  
+These errors will then be displayed in the form so the end user can correct and re-submit.</p>
 
 <?php
 $form = new PFBC\Form("ajax", 400);
@@ -35,17 +40,17 @@ $form->render();
 ?>
 
 <script type="text/javascript">
-function parseJSONResponse(latlng) {
-	var form = document.getElementById("ajax");
-	if(latlng.status == "OK") {
-		var result = latlng.results[0];
-		form.LatitudeLongitude.value = result.geometry.location.lat + ', ' + result.geometry.location.lng;
-	}
-	else
-		form.LatitudeLongitude.value = "N/A";
+	function parseJSONResponse(latlng) {
+		var form = document.getElementById("ajax");
+		if(latlng.status == "OK") {
+			var result = latlng.results[0];
+			form.LatitudeLongitude.value = result.geometry.location.lat + ', ' + result.geometry.location.lng;
+		}
+		else
+			form.LatitudeLongitude.value = "N/A";
 
-	document.getElementById("GoogleGeocodeAPIReaponse").style.display = "block";
-}
+		document.getElementById("GoogleGeocodeAPIReaponse").style.display = "block";
+	}
 </script>
 
 <?php
@@ -65,17 +70,17 @@ $form->render();
 ?>
 
 <script type="text/javascript">
-function parseJSONResponse(latlng) {
-	var form = document.getElementById("ajax");
-	if(latlng.status == "OK") {
-		var result = latlng.results[0];
-		form.LatitudeLongitude.value = result.geometry.location.lat + \', \' + result.geometry.location.lng;
-	}
-	else
-		form.LatitudeLongitude.value = "N/A";
+	function parseJSONResponse(latlng) {
+		var form = document.getElementById("ajax");
+		if(latlng.status == "OK") {
+			var result = latlng.results[0];
+			form.LatitudeLongitude.value = result.geometry.location.lat + \', \' + result.geometry.location.lng;
+		}
+		else
+			form.LatitudeLongitude.value = "N/A";
 
-	document.getElementById("GoogleGeocodeAPIReaponse").style.display = "block";
-}
+		document.getElementById("GoogleGeocodeAPIReaponse").style.display = "block";
+	}
 </script>
 ?>', true), '</pre>';
 

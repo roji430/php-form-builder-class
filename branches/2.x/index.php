@@ -24,15 +24,15 @@ into a code base that is more efficient, easier to manage, and extensible.</p>
 	<li>PHP 5.3+</li>
 </ul>
 
-<h2><a name="whats-new-different-in-version-2x">What's New/Different in Version 2.0</a></h2>
-<p>PFBC version 2.0 was a complete rewrite of the last 1.x version released - 1.1.4.  This rewrite was
+<h2><a name="whats-new-different-in-version-2x">What's New/Different in Version 2.x</a></h2>
+<p>PFBC version 2.x is a complete rewrite of the last 1.x version released - 1.1.4.  This rewrite was
 done for several reasons...</p>
 
 <ul>
 	<li>Organization - In version 1.x, most of the project's functionality was stuffed inside a single file - class.form.php,
-	which made code readability and management a real challenge.  Version 2.x organizes the various pieces of the project into
+	which made code's readability and management a real challenge.  Version 2.x organizes the various pieces of the project into
 	a logical directory structure.</li>
-	<li>Extensibility - The new object-oriented model in version 2.0 allows you extend the project's functionality more easily.
+	<li>Extensibility - The new object-oriented model in version 2.x allows you extend the project's functionality more easily.
 	Examples of extensibility include creating your own form elements, customizing the form's html/css structure, and/or creating new validation
 	rules.</li>
 	<li>Performance - In order to comply with xhtml strict rules, version 1.x used ajax to insert the form's required 
@@ -49,7 +49,7 @@ that you should be aware of when transitioning to using PFBC version 2.x.</p>
 <h3>Syntax Changes</h3>
 <ul>
 	<li>Including Project's Required PHP Script - In version 1.x, php-form-builder-class/class.form.php needed to be 
-	included in any script using this project.  In version 2.0, the required file is named PFBC/Form.php.
+	included in any script using this project.  In version 2.x, the required file is named PFBC/Form.php.
 
 		<?php
 		echo '<pre>', highlight_string('<?php
@@ -61,10 +61,12 @@ include($_SERVER["DOCUMENT_ROOT"] . "/PFBC/Form.php");
 		?>
 
 	</li>
+
 	<li>Namespaces - Version 2.x uses namespaces to prevent naming collisions and organize the project's pieces into a logical 
 	structure.  They are also used for autoloading required class files at runtime.  Namespaces were introduced in PHP 5.3, 
 	so PFBC 2.x won't work if you're using a previous version of PHP.  See <a href="http://php.net/manual/en/language.namespaces.php">
 	http://php.net/manual/en/language.namespaces.php</a> for more information on using namespaces in PHP.</li>
+
 	<li>Form Constructor - The form's contructor now includes an optional second parameter for specifying the form's width.
 
 		<?php
@@ -77,6 +79,7 @@ $form = new PFBC\Form("Version2x", 300);
 		?>
 
 	</li>
+
 	<li>Form's setAttributes Method Renamed To configure - The setAttributes method included in version 1.x is now configure in 2.x.
 
 		<?php
@@ -93,6 +96,7 @@ $form->configure(array(
 		?>
 
 	</li>
+
 	<li>Adding Elements - In version 1.x, each element had its own method for adding itself to a form.  The work flow for 
 	adding elements in version 2.x is different - the form's addElement method is passed an instance of the appropriate 
 	concrete element class.  This strategy allows for decoupling and easier extensibility.
@@ -107,20 +111,30 @@ $form->addElement(new PFBC\Element\Textbox("My Textbox:", "MyTextbox"));
 		?>
 
 	</li>
+
 	<li>Element Value Parameter - In PFBC 1.x, many of the functions for adding elements included a third parameter for 
 	specifying the element's value.  This parameter has been removed from version 2.x.  Values can be added to elements 
-	using the form's setValues method.
+	using the form's setValues method.  You can also specify the value in the element's final parameter within an associative
+	array.
 
 		<?php
 		echo '<pre>', highlight_string('<?php
 //Version 1.x
-$form->addTextbox("My Required Textbox:", "MyRequiredTextbox", "", array("required" => 1));
+$form->addTextbox("My Textbox:", "MyTextbox", "My Textbox\'s Value");
 //Version 2.x
-$form->addElement(new PFBC\Element\Textbox("My Required Textbox:", "MyRequiredTextbox", array("required" => 1)));
+$form->addElement(new PFBC\Element\Textbox("My Textbox:", "MyRequiredTextbox", array("required" => 1)));
+$form->setValues(array( 
+	"MyTextbox" => "My Textbox\'s Value"
+));
+$form->addElement(new PFBC\Element\Textbox("My Textbox:", "MyTextbox"));
+$form->addElement(new PFBC\Element\Textbox("My Textbox:", "MyTextbox", array(
+	"value" => "My Textbox\'s Value"
+)));
 ?>', true), '</pre>';
 		?>
 
 	</li>
+
 	<li>PHP Validation - PFBC version 2.x implements server-side validation through the isValid static method.  Previous 
 	1.x versions required the new form instance to be created before calling the validate method.
 
@@ -135,6 +149,7 @@ if(PFBC\Form::isValid("PHPValidation")) {}
 		?>
 
 	</li>
+
 	<li>Returning Ajax Validation Errors - The renderAjaxErrorResponse method has also been converted to a static 
 	method in version 2.x.
 
@@ -151,10 +166,11 @@ if(!PFBC\Form::isValid("Ajax"))
 		?>
 
 	</li>
+
 	<li>Form Layout Properties - One of the significant updates made in version 2.x was decoupling the form's html/css 
 	structure into multiple views.  Version 2.x contains four available views: Standard, Grid, SideBySide, and Horizontal.  
 	Version 1.x's map property was replaced by the Grid view.  Version 1.x's labelWidth, labelRightAlign, labelPaddingRight, 
-	and labelPaddingTop properties now belong to the SideBySide view.</li>
+	and labelPaddingTop properties now belong to the SideBySide view.
 
 		<?php
 		echo '<pre>', highlight_string('<?php
@@ -181,10 +197,58 @@ $form->configure(array(
 
 ?>', true), '</pre>';
 		?>
+	
+	</li>
+		
+	<li>Fieldsets - Version 1.x provided two methods, openFieldset and closeFieldset, for incorporating fieldsets into forms.
+	PFBC 2.x has no such functions; however, you can make use of the HTMLExternal method to manually insert fieldsets.
+	
+		<?php
+		echo '<pre>', highlight_string('<?php
+//Version 1.x
+$form->openFieldset("My Fieldset");
+$form->closeFieldset();
+//Version 2.x
+$form->addElement(PFBC\Element\HTMLExternal(\'<fieldset><legend>My Fieldset</legend>\'));
+$form->addElement(PFBC\Element\HTMLExternal(\'</fieldset>\'));
+?>', true), '</pre>';
+		?>
+
+	</li>
 
 </ul>
 
+<h3>What's New in Version 2.x?</h3>
+<ul>
+	<li>Element Descriptions - The tooltip property that was included in PFBC 1.x have been replaced with the description property,
+	which allows you to include a brief explanation for your form fields.  These descriptions will be displayed below the element's
+	label.
+
+		<?php
+		echo '<pre>', highlight_string('<?php
+$form->addElement(PFBC\Element\Textbox("My Textbox:", "MyTextbox", array(
+	"description" => "This is my textbox\'s description."
+)));
+?>', true), '</pre>';
+		?>
+	
+	</li>
+
+	<li>Regular Expression Validation - You can now apply custom validation rules to your form elements through the RegExp validation
+	class.
+
+		<?php
+		echo '<pre>', highlight_string('<?php
+$form->addElement(PFBC\Element\Textbox("My Textbox:", "MyTextbox", array(
+	"validation" => new PFBC\Validation\RegExp("/php|form|builder|class/", "This textbox must contain one of the following words - php, form, builder, and/or class.")
+)));
+?>', true), '</pre>';
+		?>
+	</li>	
+</ul>
+
 <h3>What's Not Included in Version 2.x?</h3>
+
 <ul>
 	<li>Form Elements
 		<ul>
@@ -192,12 +256,13 @@ $form->configure(array(
 			<li>jQueryUI Slider Widget</li>
 			<li>jQuery Date Range Picker Plugin</li>
 			<li>jQuery Color Picker Plugin</li>
-			<li>CKEditor Web Editor</li>
+			<li>True/False Radio Buttons</li>
 			<li>True/False Radio Buttons</li>
 		</ul>
 	</li>
 	<li>Features/Functionality
 		<ul>
+			<li>Javascript Validation</li>
 			<li>Tooltips</li>
 			<li>Google Docs Spreadsheet Integration</li>
 			<li>Email Support w/PHPMailer + Google's Gmail Service</li>
