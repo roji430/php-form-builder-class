@@ -4,11 +4,25 @@ namespace PFBC\Element;
 class Checksort extends \PFBC\Element\Sort {
 	protected $attributes = array("type" => "checkbox");
 	protected $inline;
+	protected $maxheight;
 
 	public function jQueryDocumentReady() {
 		parent::jQueryDocumentReady();	
 		if(!empty($this->inline))
 			echo 'jQuery("#', $this->attributes["id"], ' .pfbc-checkbox:last").css("margin-right", "0");';
+
+		if(!empty($this->maxheight) && is_numeric($this->maxheight)) {
+			echo <<<JS
+var checkboxes = jQuery("#{$this->attributes["id"]} .pfbc-checkboxes");
+if(checkboxes.outerHeight() > {$this->maxheight}) {
+	checkboxes.css({ 
+		"height": "{$this->maxheight}px", 
+		"overflow": "auto", 
+		"overflow-x": "hidden" 
+	});
+}	
+JS;
+		}	
 	}
 	
 	public function render() { 
@@ -20,7 +34,7 @@ class Checksort extends \PFBC\Element\Sort {
 			$this->attributes["value"] = array();
 		
 		$count = 0;
-		echo '<div id="', $this->attributes["id"], '">';
+		echo '<div id="', $this->attributes["id"], '"><div class="pfbc-checkboxes">';
 		foreach($this->options as $value => $text) {
 			echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick")), ' value="', $this->filter($value), '"';
 			if(in_array($value, $this->attributes["value"]))
@@ -28,6 +42,7 @@ class Checksort extends \PFBC\Element\Sort {
 			echo ' onclick="updateChecksort(this, \'', $this->filter($text), '\');"/></td><td><label for="', $this->attributes["id"], "-", $count, '">', $text, '</label></td></tr></table></div>';
 			++$count;
 		}	
+		echo '</div>';
 
 		if(!empty($this->inline))
 			echo '<div style="clear: both;"></div>';

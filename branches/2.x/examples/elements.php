@@ -27,7 +27,11 @@ Button, Captcha, Checkbox, Checksort, CKEditor, Date, Email, Hidden, HTML, HTMLE
 Textbox, TinyMCE, YesNo.</p>
 
 <?php
-$options = array("Option #1", "Option #2", "Option #3");
+$options = array(
+	"Option #1", 
+	"Option #2", 
+	"Option #3"
+);
 $form = new PFBC\Form("elements", 400);
 $form->addElement(new PFBC\Element\Hidden("form", "elements"));
 $form->addElement(new PFBC\Element\Textbox("Textbox:", "Textbox"));

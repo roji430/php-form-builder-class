@@ -4,10 +4,24 @@ namespace PFBC\Element;
 class Checkbox extends \PFBC\OptionElement {
 	protected $attributes = array("type" => "checkbox");
 	protected $inline;
+	protected $maxheight;
 
 	public function jQueryDocumentReady() {
 		if(!empty($this->inline))
 			echo 'jQuery("#', $this->attributes["id"], ' .pfbc-checkbox:last").css("margin-right", "0");';
+
+		if(!empty($this->maxheight) && is_numeric($this->maxheight)) {
+			echo <<<JS
+var checkboxes = jQuery("#{$this->attributes["id"]} .pfbc-checkboxes");
+if(checkboxes.outerHeight() > {$this->maxheight}) {
+	checkboxes.css({ 
+		"height": "{$this->maxheight}px", 
+		"overflow": "auto", 
+		"overflow-x": "hidden" 
+	});
+}	
+JS;
+		}	
 	}
 
 	public function render() { 
@@ -22,7 +36,7 @@ class Checkbox extends \PFBC\OptionElement {
 			$this->attributes["name"] .= "[]";
 
 		$count = 0;
-		echo '<div id="', $this->attributes["id"], '">';
+		echo '<div id="', $this->attributes["id"], '"><div class="pfbc-checkboxes">';
 		foreach($this->options as $value => $text) {
 			echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(array("id", "value", "checked")), ' value="', $this->filter($value), '"';
 			if(in_array($value, $this->attributes["value"]))
@@ -30,6 +44,7 @@ class Checkbox extends \PFBC\OptionElement {
 			echo '/></td><td><label for="', $this->attributes["id"], "-", $count, '">', $text, '</label></td></tr></table></div>';
 			++$count;
 		}	
+		echo '</div>';
 
 		if(!empty($this->inline))
 			echo '<div style="clear: both;"></div>';

@@ -4,16 +4,30 @@ namespace PFBC\Element;
 class Radio extends \PFBC\OptionElement {
 	protected $attributes = array("type" => "radio");
 	protected $inline;
+	protected $maxheight;
 
 	public function jQueryDocumentReady() {
 		if(!empty($this->inline))
 			echo 'jQuery("#', $this->attributes["id"], ' .pfbc-radio:last").css("margin-right", "0");';
+
+		if(!empty($this->maxheight) && is_numeric($this->maxheight)) {
+			echo <<<JS
+var checkboxes = jQuery("#{$this->attributes["id"]} .pfbc-radio-buttons");
+if(checkboxes.outerHeight() > {$this->maxheight}) {
+	checkboxes.css({ 
+		"height": "{$this->maxheight}px", 
+		"overflow": "auto", 
+		"overflow-x": "hidden" 
+	});
+}	
+JS;
+		}	
 	}
 	
 	public function render() { 
 		$count = 0;
 		$checked = false;
-		echo '<div id="', $this->attributes["id"], '">';
+		echo '<div id="', $this->attributes["id"], '"><div class="pfbc-radio-buttons">';
 		foreach($this->options as $value => $text) {
 			echo '<div class="pfbc-radio"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(array("id", "value", "checked")), ' value="', $this->filter($value), '"';
 			if(isset($this->attributes["value"]) && $this->attributes["value"] == $value)
@@ -21,6 +35,7 @@ class Radio extends \PFBC\OptionElement {
 			echo '/></td><td><label for="', $this->attributes["id"], "-", $count, '">', $text, '</label></td></tr></table></div>';
 			++$count;
 		}	
+		echo '</div>';
 
 		if(!empty($this->inline))
 			echo '<div style="clear: both;"></div>';
@@ -32,5 +47,4 @@ class Radio extends \PFBC\OptionElement {
 		if(!empty($this->inline))
 			echo '#', $this->attributes["id"], ' .pfbc-radio { float: left; margin-right: 0.5em; }';
 	}		
-
 }
