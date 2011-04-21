@@ -52,6 +52,7 @@ echo <<<HTML
 					<li class="indent-l1"><a href="{$examplePath}elements.php">Elements</a></li>
 					<li class="indent-l1"><a href="{$examplePath}views.php">Views</a></li>
 					<li class="indent-l1"><a href="{$examplePath}validation.php">Validation</a></li>
+					<li class="indent-l1"><a href="{$examplePath}setting-element-values.php">Setting Element Values</a></li>
 					<li class="indent-l1"><a href="{$examplePath}ajax.php">Ajax</a></li>
 				</ul>
 			</div>

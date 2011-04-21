@@ -27,11 +27,7 @@ Button, Captcha, Checkbox, Checksort, CKEditor, Date, Email, Hidden, HTML, HTMLE
 Textbox, TinyMCE, YesNo.</p>
 
 <?php
-$options = array(
-	"Option #1", 
-	"Option #2", 
-	"Option #3"
-);
+$options = array("Option #1", "Option #2", "Option #3");
 $form = new PFBC\Form("elements", 400);
 $form->addElement(new PFBC\Element\Hidden("form", "elements"));
 $form->addElement(new PFBC\Element\Textbox("Textbox:", "Textbox"));
@@ -59,7 +55,7 @@ $form->addElement(new PFBC\Element\Date("Date:", "Date", array(
 	"description" => "The Date element leverages jQueryUI's Datepicker widget to allow end users to select a date from a calendar."
 )));
 $form->addElement(new PFBC\Element\Captcha("Captcha:", array(
-	"description" => "The Captcha element leverages Google's reCAPTCHA anti-bot server to prevent spam submissions."
+	"description" => "The Captcha element leverages Google's reCAPTCHA anti-bot service to prevent spam submissions."
 )));
 $form->addElement(new PFBC\Element\Button);
 $form->render();
