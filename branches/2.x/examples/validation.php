@@ -66,6 +66,10 @@ $form->addElement(new PFBC\Element\Textbox("Url:", "Url", array(
 	"validation" => new PFBC\Validation\Url,
 	"description" => "The Url validation class will verify that the element's submitted value is a url.  See php's filter_var function (w/FILTER_VALIDATE_URL flag) for details."
 )));
+$form->addElement(new PFBC\Element\Textbox("AlphaNumeric:", "AlphaNumberic", array(
+	"validation" => new PFBC\Validation\AlphaNumeric,
+	"description" => "The AlphaNumeric validation class will verify that the element's submitted value contains only letters, numbers, underscores, and/or hyphens."
+)));
 $form->addElement(new PFBC\Element\Button);
 $form->render();
 
@@ -96,6 +100,10 @@ $form->addElement(new PFBC\Element\Textbox("Numeric:", "Numeric", array(
 )));
 $form->addElement(new PFBC\Element\Textbox("Url:", "Url", array(
 	"validation" => new PFBC\Validation\Url
+)));
+$form->addElement(new PFBC\Element\Textbox("AlphaNumeric:", "AlphaNumberic", array(
+	"validation" => new PFBC\Validation\AlphaNumeric,
+	"description" => "The AlphaNumeric validation class will verify that the element\'s submitted value contains only letters, numbers, underscores, and/or hyphens."
 )));
 $form->addElement(new PFBC\Element\Button);
 $form->render();

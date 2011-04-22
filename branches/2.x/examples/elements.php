@@ -54,6 +54,9 @@ $form->addElement(new PFBC\Element\Email("Email:", "Email", array(
 $form->addElement(new PFBC\Element\Date("Date:", "Date", array(
 	"description" => "The Date element leverages jQueryUI's Datepicker widget to allow end users to select a date from a calendar."
 )));
+$form->addElement(new PFBC\Element\Color("Color:", "Color", array(
+	"description" => "The Color element leverages the ColorPicker jQuery plugin to allow end users to select a color."
+)));
 $form->addElement(new PFBC\Element\Captcha("Captcha:", array(
 	"description" => "The Captcha element leverages Google's reCAPTCHA anti-bot service to prevent spam submissions."
 )));
@@ -75,6 +78,7 @@ $form->addElement(new PFBC\Element\Checksort("Checksort:", "Checksort", $options
 $form->addElement(new PFBC\Element\Sort("Sort:", "Sort", $options));
 $form->addElement(new PFBC\Element\State("State:", "State"));
 $form->addElement(new PFBC\Element\Email("Email:", "Email"));
+$form->addElement(new PFBC\Element\Color("Color:", "Color"));
 $form->addElement(new PFBC\Element\Date("Date:", "Date"));
 $form->addElement(new PFBC\Element\Captcha("Captcha:"));
 $form->addElement(new PFBC\Element\Button);
