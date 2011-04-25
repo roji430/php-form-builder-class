@@ -37,11 +37,19 @@ class Form extends Base {
 		if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
 			$this->prefix = "https";
 		
+		/*The Standard view class is applied by default and will be used unless a different view is
+		specified in the form's configure method*/
 		if(empty($this->view))
 			$this->view = new View\Standard;
+
 		if(empty($this->error))
 			$this->error = new Error\Standard;
 		
+		/*The resourcePath property is used to identify where third-party resources needed by the
+		project are located.  This property will automatically be set properly if the PFBC directory
+		is uploaded within the server's document root.  If symbolic links are used to reference the PFBC
+		directory, you may need to set this property in the form's configure method or directly in this
+		constructor.*/
 		$path = __DIR__ . "/Resources";
 		if(strpos($path, $_SERVER["DOCUMENT_ROOT"]) !== false)
 			$this->resourcesPath = substr($path, strlen($_SERVER["DOCUMENT_ROOT"]));
@@ -57,12 +65,15 @@ class Form extends Base {
 
 	public function addElement(Element $element) {
 		$element->setForm($this);
+		//If the element doesn't have a specified id, a generic identifier is applied.
 		$id = $element->getID();
 		if(empty($id))
 			$element->setID($this->attributes["id"] . "-element-" . sizeof($this->elements));
 		$this->elements[] = $element;
     }
 
+	/*Values that have been set through the setValues method, either manually by the developer
+	or after validation errors, are applied to elements within this method.*/
     private function applyValues() {
         foreach($this->elements as $element) {
             $name = $element->getName();
@@ -73,16 +84,18 @@ class Form extends Base {
         }
     }
 
-	public static function clearSessionErrors($id = "pfbc") {
+	public static function clearErrors($id = "pfbc") {
 		if(!empty($_SESSION["pfbc"][$id]["errors"]))
 			unset($_SESSION["pfbc"][$id]["errors"]);
 	}
 
-	public static function clearSessionValues($id = "pfbc") {
+	public static function clearValues($id = "pfbc") {
 		if(!empty($_SESSION["pfbc"][$id]["values"]))
 			unset($_SESSION["pfbc"][$id]["values"]);
 	}
 
+	/*This method parses the form's width property into a numeric width value and a width suffix - either px or %.
+	These values are used by the form's concrete view class.*/
 	public function formatWidthProperties() {
 		if(!empty($this->width)) {
 			if(substr($this->width, -1) == "%") {
@@ -93,6 +106,7 @@ class Form extends Base {
 				$this->width = substr($this->width, 0, -2);
 		}
 		else {
+			/*If the form's width property is empty, 100% will be assumed.*/
 			$this->width = 100;
 			$this->widthSuffix = "%";
 		}
@@ -118,7 +132,7 @@ class Form extends Base {
         return $this->resourcesPath;
     }
 
-	public static function getSessionErrors($id = "pfbc") {
+	public static function getErrors($id = "pfbc") {
 		$errors = array();
 		if(!empty($_SESSION["pfbc"][$id]["errors"]))
 			$errors = $_SESSION["pfbc"][$id]["errors"];
@@ -142,6 +156,7 @@ class Form extends Base {
 
 	public static function isValid($id = "pfbc", $clearValues = true) {
 		$valid = true;
+		/*The form's instance is recovered (unserialized) from the session.*/
 		$form = self::recover($id);
 		if(!empty($form)) {
 			if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -149,9 +164,12 @@ class Form extends Base {
 			else
 				$data = $_GET;
 			
-			self::clearSessionValues($id);
-			self::clearSessionErrors($id);
+			/*Any values/errors stored in the session for this form are cleared.*/
+			self::clearValues($id);
+			self::clearErrors($id);
 
+			/*Each element's value is saved in the session and checked against any validation rules applied
+			to the element.*/
 			if(!empty($form->elements)) {
 				foreach($form->elements as $element) {
 					$name = $element->getName();
@@ -172,23 +190,27 @@ class Form extends Base {
 					else
 						$value = null;
 					
+					/*If a validation error is found, the error message is saved in the session along with
+					the element's name.*/
 					if(!$element->isValid($value)) {
-						self::setSessionError($id, $name, $element->getErrors());
+						self::setError($id, $name, $element->getErrors());
 						$valid = false;
 					}	
 				}
 			}
 
+			/*If no validation errors were found, the form's session values are cleared.*/
 			if($valid) {
 				if($clearValues)
-					self::clearSessionValues($id);
-				self::clearSessionErrors($id);
+					self::clearValues($id);
+				self::clearErrors($id);
 			}		
 		}
 
 		return $valid;
 	}
 
+	/*This method restores the serialized form instance.*/
 	private function recover($id) {
 		if(!empty($_SESSION["pfbc"][$id]["form"]))
 			return unserialize($_SESSION["pfbc"][$id]["form"]);
@@ -327,7 +349,7 @@ JS;
 		$_SESSION["pfbc"][$this->attributes["id"]]["form"] = serialize($this);
 	}
 
-	public static function setSessionError($id, $element, $errors) {
+	public static function setError($id, $element, $errors) {
 		if(!is_array($errors))
 			$errors = array($errors);
 		if(empty($_SESSION["pfbc"][$id]["errors"][$element]))

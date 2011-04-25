@@ -21,7 +21,7 @@ JS;
 	}
 
 	public function render() {
-		$errors = \PFBC\Form::getSessionErrors($this->getForm()->getId());
+		$errors = \PFBC\Form::getErrors($this->getForm()->getId());
 
 		if(!empty($errors)) {
 			$list = array();
@@ -40,7 +40,7 @@ JS;
     }
 
 	public function renderAjaxErrorResponse() {
-        $errors = \PFBC\Form::getSessionErrors($this->getForm()->getId());
+        $errors = \PFBC\Form::getErrors($this->getForm()->getId());
         if(!empty($errors)) {
             $list = array();
             array_walk_recursive($errors, function($value, $key, $list) {
