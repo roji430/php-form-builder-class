@@ -13,6 +13,7 @@ abstract class View extends Base {
 		return $this->form;
 	}
 
+	/*This method encapsulates the various pieces that are included in an element's label.*/
 	protected function renderLabel($element) {
 		$label = $element->getLabel();
 		$id = $element->getID();
@@ -32,6 +33,7 @@ abstract class View extends Base {
 		$this->form = $form;
 	}
 
+	/*jQuery is used to apply css entries to the last element.*/
 	public function jQueryDocumentReady() {
 		echo 'jQuery("#', $this->getForm()->getId(), ' .pfbc-element:last").css({ "margin-bottom": "0", "padding-bottom": "0", "border-bottom": "none" });';
 	}	
@@ -41,6 +43,7 @@ abstract class View extends Base {
 	public function renderCSS() {
 		$id = $this->getForm()->getId();
 
+		/*For ease-of-use, default styles are applied to form elements.*/
 		if(!empty($this->style)) {
 			echo <<<CSS
 #$id .pfbc-label label { font-weight: bold; }

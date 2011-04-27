@@ -19,6 +19,8 @@ class Grid extends \PFBC\View {
 
 	public function jQueryDocumentReady() {
 		$id = $this->getForm()->getId();
+		/*jQuery is used to remove margin from the elements on the far left/right of each row and apply css 
+		entries to the last row.*/
 		echo <<<JS
 jQuery("#$id .pfbc-grid").each(function() { 
 	jQuery(".pfbc-element:first", this).css({ "margin-left": "0" }); 
@@ -50,6 +52,7 @@ JS;
 			if($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal)
 				$element->render();
 			elseif($element instanceof \PFBC\Element\Button) {
+				/*Consecutive Button elements are rendered horizontally in the same row.*/
 				if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
 					echo '<div class="pfbc-grid pfbc-grid-1"><div class="pfbc-element pfbc-buttons">';
 				$element->render();
@@ -108,10 +111,12 @@ CSS;
 	
 		$elements = $form->getElements();
 		foreach($elements as $element) {
+			/*Hidden, HTMLExternal, and Button element classes aren't included in the grid.*/
 			if(!$element instanceof \PFBC\Element\Hidden && !$element instanceof \PFBC\Element\HTMLExternal && !$element instanceof \PFBC\Element\Button)
 				++$this->gridIncludedElements;
 		}
 
+		/*If the grid array contains more elements than the form has available, it is revised.*/
 		if(array_sum($this->grid) > $this->gridIncludedElements) {
 			$gridRevised = array();
 			foreach($this->grid as $grid) {
