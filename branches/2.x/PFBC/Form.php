@@ -19,7 +19,8 @@ class Form extends Base {
 	protected $ajaxCallback;
 	protected $attributes;
 	protected $error;
-	protected $jQueryTheme = "smoothness";
+	/*jQueryUI themes can be previewed at http://jqueryui.com/themeroller/.*/
+	protected $jQueryUITheme = "smoothness";
 	protected $jQueryUIButtons = 1;
 	protected $resourcesPath;
 	protected $prevent = array();
@@ -220,6 +221,8 @@ class Form extends Base {
 		$this->view->setForm($this);
 		$this->error->setForm($this);
 
+		/*When validation errors occur, the form's submitted values are saved in a session 
+		array, which allows them to be pre-populated when the user is redirected to the form.*/
 		$values = self::getSessionValues($this->attributes["id"]);
 		if(!empty($values))
 			$this->setValues($values);
@@ -231,9 +234,12 @@ class Form extends Base {
 		$this->view->render();
 		$this->renderJS();
 
+		/*The form's instance is serialized and saved in a session variable for use during validation.*/
 		$this->save();
 	}
 
+	/*When ajax is used to submit the form's data, validation errors need to be manually sent back to the 
+	form using json.*/
 	public static function renderAjaxErrorResponse($id = "pfbc") {
 		$form = self::recover($id);
 		$form->error->renderAjaxErrorResponse();
@@ -253,7 +259,7 @@ class Form extends Base {
 	private function renderCSSFiles() {
 		$urls = array();
 		if(!in_array("jQueryUI", $this->prevent))
-			$urls[] = $this->prefix . "://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/" . $this->jQueryTheme . "/jquery-ui.css";
+			$urls[] = $this->prefix . "://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/" . $this->jQueryUITheme . "/jquery-ui.css";
 		foreach($this->elements as $element) {
 			$elementUrls = $element->getCSSFiles();
 			if(is_array($elementUrls))
@@ -290,6 +296,8 @@ class Form extends Base {
 		if(!empty($this->jQueryUIButtons))
 			echo 'jQuery("#', $id, ' input[type=button], #', $id, ' input[type=submit]").button();';
 		
+		/*For ajax, an anonymous onsubmit javascript function is bound to the form using jQuery.  jQuery's
+		serialize function is used to grab each element's name/value pair.*/
 		if(!empty($this->ajax)) {
 			echo 'jQuery("#', $id, '").bind("submit", function() {';
 			$this->error->clear();
@@ -307,6 +315,7 @@ JS;
 					}
 					else {
 JS;
+			/*A callback function can be specified to handle any post submission events.*/
 			if(!empty($this->ajaxCallback))
 				echo $this->ajaxCallback, "(response);";
 			echo <<<JS
@@ -345,10 +354,13 @@ JS;
 		}	
 	}
 
+	/*The save method serialized the form's instance and saves it in the session.*/
 	private function save() {
 		$_SESSION["pfbc"][$this->attributes["id"]]["form"] = serialize($this);
 	}
 
+	/*Valldation errors are saved in the session after the form submission, and will be displayed to the user
+	when redirected back to the form.*/
 	public static function setError($id, $element, $errors) {
 		if(!is_array($errors))
 			$errors = array($errors);
@@ -363,6 +375,8 @@ JS;
 		$_SESSION["pfbc"][$id]["values"][$element] = $value;
 	}
 
+	/*An associative array is used to pre-populate form elements.  The keys of this array correspond with
+	the element names.*/
 	public function setValues(array $values) {
         $this->values = array_merge($this->values, $values);
     }
