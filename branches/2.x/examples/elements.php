@@ -43,7 +43,7 @@ $form->addElement(new PFBC\Element\Checksort("Checksort:", "Checksort", $options
 	"description" => "Checksort leverages jQueryUI's Sortable interaction to allow end users to both select and sort items in one location."
 )));
 $form->addElement(new PFBC\Element\Sort("Sort:", "Sort", $options, array(
-	"description" => "Like Checksort, the Sort element leverages jQueryUI's Sortable interaction to allow end users to both sort a group of items."
+	"description" => "Like Checksort, the Sort element leverages jQueryUI's Sortable interaction to allow end users to sort a group of items."
 )));
 $form->addElement(new PFBC\Element\State("State:", "State", array(
 	"description" => "The State element provides a shortcut for adding a Select element with options for each of the 50 US states."

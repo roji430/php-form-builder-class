@@ -328,9 +328,9 @@ JS;
 	private function renderJSFiles() {
 		$urls = array();
 		if(!in_array("jQuery", $this->prevent))
-			$urls[] = $this->prefix . "://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js";
+			$urls[] = $this->prefix . "://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js";
 		if(!in_array("jQueryUI", $this->prevent))
-			$urls[] = $this->prefix . "://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js";
+			$urls[] = $this->prefix . "://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js";
 		foreach($this->elements as $element) {
 			$elementUrls = $element->getJSFiles();
 			if(is_array($elementUrls))
