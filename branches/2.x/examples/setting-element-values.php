@@ -81,6 +81,9 @@ The keys of this array correspond with your form's element names.</p>
 
 <?php
 $form = new PFBC\Form("setting-element-values2", 400);
+$form->configure(array(
+	"prevent" => array("focus", "jQuery", "jQueryUI")
+));
 $form->setValues(array(
 	"Textbox" => "My Textbox's Value",
 	"Textarea" => "My Textarea's Value",

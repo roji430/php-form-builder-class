@@ -71,6 +71,11 @@ class Form extends Base {
 		if(empty($id))
 			$element->setID($this->attributes["id"] . "-element-" . sizeof($this->elements));
 		$this->elements[] = $element;
+
+		/*For ease-of-use, the form tag's encytype attribute is automatically set if the File element
+		class is added.*/
+		if($element instanceof \PFBC\Element\File)
+			$this->attributes["enctype"] = "multipart/form-data";
     }
 
 	/*Values that have been set through the setValues method, either manually by the developer
