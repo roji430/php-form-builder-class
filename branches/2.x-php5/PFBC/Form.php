@@ -220,7 +220,7 @@ class Form extends Base {
 			return unserialize($_SESSION["pfbc"][$id]["form"]);
 	}
 
-	public function render() {
+	public function render($returnHTML = false) {
 		$this->view->setForm($this);
 		$this->error->setForm($this);
 
@@ -233,12 +233,21 @@ class Form extends Base {
 
 		$this->formatWidthProperties();
 
+		if($returnHTML)
+			ob_start();
+
 		$this->renderCSS();
 		$this->view->render();
 		$this->renderJS();
 
 		/*The form's instance is serialized and saved in a session variable for use during validation.*/
 		$this->save();
+
+		if($returnHTML) {
+			$html = ob_get_contents();
+			ob_end_clean();
+			return $html;
+		}
 	}
 
 	/*When ajax is used to submit the form's data, validation errors need to be manually sent back to the 
