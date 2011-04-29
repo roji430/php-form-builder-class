@@ -49,7 +49,7 @@ JS;
 		$errors = $this->parse($errors);
 
         if(!empty($errors)) {
-            $list = array();
+            $errors = array();
 
             header("Content-type: application/json");
             echo json_encode(array("errors" => $errors));
