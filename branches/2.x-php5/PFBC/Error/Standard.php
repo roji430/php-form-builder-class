@@ -30,8 +30,7 @@ JS;
 	}
 
 	public function render() {
-		$errors = Form::getErrors($this->getForm()->getId());
-		$errors = $this->parse($errors);
+		$errors = $this->parse(Form::getErrors($this->getForm()->getId()));
 
 		if(!empty($errors)) {
 			$size = sizeof($errors);
@@ -45,12 +44,9 @@ JS;
     }
 
 	public function renderAjaxErrorResponse() {
-        $errors = Form::getErrors($this->getForm()->getId());
-		$errors = $this->parse($errors);
+        $errors = $this->parse(Form::getErrors($this->getForm()->getId()));
 
         if(!empty($errors)) {
-            $errors = array();
-
             header("Content-type: application/json");
             echo json_encode(array("errors" => $errors));
         }

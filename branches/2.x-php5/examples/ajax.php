@@ -9,7 +9,7 @@ if(isset($_POST["form"])) {
 		echo file_get_contents("http://maps.google.com/maps/api/geocode/json?address=" . urlencode($_POST["Address"]) . "&sensor=false");
 	}
 	else
-		Form::renderAjaxErrorResponse("example2");
+		Form::renderAjaxErrorResponse($_POST["form"]);
 	exit();
 }	
 
