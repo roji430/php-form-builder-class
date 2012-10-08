@@ -2,6 +2,13 @@
 class Element_CKEditor extends Element_Textarea {
 	protected $basic;
 
+	public function render() {
+        echo "<textarea", $this->getAttributes(array("value", "required")), ">";
+        if(!empty($this->attributes["value"]))
+            echo $this->attributes["value"];
+        echo "</textarea>";
+    }
+
 	function renderJS() {
 		echo 'CKEDITOR.replace("', $this->attributes["id"], '"';
 		if(!empty($this->basic))

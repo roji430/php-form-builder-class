@@ -1,6 +1,10 @@
 <?php
 class Element_jQueryUIDate extends Element_Textbox {
-    protected $jQueryOptions;
+	protected $attributes = array(
+		"type" => "text",
+		"autocomplete" => "off"
+	);
+	protected $jQueryOptions;
 
 	public function getCSSFiles() {
 		return array(
