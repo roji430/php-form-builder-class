@@ -40,7 +40,7 @@ $form->addElement(new Element_Hidden("form", "ajax"));
 $form->addElement(new Element_HTML('<legend>Using the Google Geocoding API</legend>'));
 $form->addElement(new Element_Textbox("Address:", "Address", array("required" => 1)));
 $form->addElement(new Element_HTML('<div id="GoogleGeocodeAPIReaponse" style="display: none;">'));
-$form->addElement(new Element_Textbox("Latitude/Longitude:", "LatitudeLongitude", array("readonly" => "readonly")));
+$form->addElement(new Element_Textbox("Latitude/Longitude:", "LatitudeLongitude", array("readonly" => "")));
 $form->addElement(new Element_HTML('</div>'));
 $form->addElement(new Element_Button("Geocode", "submit", array("icon" => "search")));
 $form->render();
@@ -66,13 +66,14 @@ $form = new Form("ajax");
 $form->configure(array(
 	"prevent" => array("bootstrap", "jQuery"),
 	"ajax" => 1,
-	"ajaxCallback" => "parseJSONResponse",
+	"ajaxCallback" => "parseJSONResponse"
 ));
 $form->addElement(new Element_Hidden("form", "ajax"));
+$form->addElement(new Element_HTML(\'<legend>Using the Google Geocoding API</legend>\'));
 $form->addElement(new Element_Textbox("Address:", "Address", array("required" => 1)));
-$form->addElement(new Element_HTMLExternal(\'<div id="GoogleGeocodeAPIReaponse" style="display: none;">\'));
-$form->addElement(new Element_Textbox("Latitude/Longitude:", "LatitudeLongitude", array("readonly" => "readonly")));
-$form->addElement(new Element_HTMLExternal(\'</div>\'));
+$form->addElement(new Element_HTML(\'<div id="GoogleGeocodeAPIReaponse" style="display: none;">\'));
+$form->addElement(new Element_Textbox("Latitude/Longitude:", "LatitudeLongitude", array("readonly" => "")));
+$form->addElement(new Element_HTML(\'</div>\'));
 $form->addElement(new Element_Button("Geocode", "submit", array("icon" => "search")));
 $form->render();
 ?>
