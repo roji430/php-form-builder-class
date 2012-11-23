@@ -1,6 +1,6 @@
 <?php
-abstract class Error extends Base {
-	protected $form;
+abstract class ErrorView extends Base {
+	protected $_form;
 
 	public function __construct(array $properties = null) {
 		$this->configure($properties);
@@ -9,7 +9,7 @@ abstract class Error extends Base {
 	public abstract function applyAjaxErrorResponse();
 
 	public function clear() {
-		echo 'jQuery("#', $this->form->getId(), ' .alert-error").remove();';
+		echo 'jQuery("#', $this->_form->getAttribute("id"), ' .alert-error").remove();';
 	}
 
 	public abstract function render();
@@ -17,7 +17,7 @@ abstract class Error extends Base {
 
 	public function renderCSS() {}
 
-	public function setForm(Form $form) {
-		$this->form = $form;
+	public function _setForm(Form $form) {
+		$this->_form = $form;
 	}
 }

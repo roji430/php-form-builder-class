@@ -6,6 +6,6 @@ class Element_HTML extends Element {
 	}
 
 	public function render() { 
-		echo $this->attributes["value"];
+		echo $this->_attributes["value"];
 	}
 }

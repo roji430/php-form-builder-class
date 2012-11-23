@@ -1,6 +1,6 @@
 <?php
 class Element_Textbox extends Element {
-	protected $attributes = array("type" => "text");
+	protected $_attributes = array("type" => "text");
 	protected $prepend;
 	protected $append;
 

@@ -1,10 +1,10 @@
 <?php
 class View_Vertical extends View {
 	public function render() {
-		echo '<form', $this->form->getAttributes(), '>';
-		$this->form->getError()->render();
+		echo '<form', $this->_form->getAttributes(), '>';
+		$this->_form->getErrorView()->render();
 
-		$elements = $this->form->getElements();
+		$elements = $this->_form->getElements();
         $elementSize = sizeof($elements);
         $elementCount = 0;
         for($e = 0; $e < $elementSize; ++$e) {
@@ -32,7 +32,7 @@ class View_Vertical extends View {
 
 	protected function renderLabel(Element $element) {
         $label = $element->getLabel();
-		echo '<label for="', $element->getID(), '">';
+		echo '<label for="', $element->getAttribute("id"), '">';
         if(!empty($label)) {
 			if($element->isRequired())
 				echo '<span class="required">* </span>';

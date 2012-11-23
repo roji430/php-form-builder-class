@@ -3,12 +3,12 @@ class View_Inline extends View {
 	protected $class = "form-inline";
 
 	public function render() {
-		$this->form->setClass($this->class);
+		$this->_form->appendAttribute("class", $this->class);
 
-		echo '<form', $this->form->getAttributes(), '>';
-		$this->form->getError()->render();
+		echo '<form', $this->_form->getAttributes(), '>';
+		$this->_form->getErrorView()->render();
 
-		$elements = $this->form->getElements();
+		$elements = $this->_form->getElements();
         $elementSize = sizeof($elements);
         $elementCount = 0;
         for($e = 0; $e < $elementSize; ++$e) {
@@ -25,7 +25,7 @@ class View_Inline extends View {
 	protected function renderLabel(Element $element) {
         $label = $element->getLabel();
         if(!empty($label)) {
-			echo '<label for="', $element->getID(), '">';
+			echo '<label for="', $element->getAttribute("id"), '">';
 			if($element->isRequired())
 				echo '<span class="required">* </span>';
 			echo $label;	

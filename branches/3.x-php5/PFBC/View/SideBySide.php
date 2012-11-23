@@ -3,11 +3,12 @@ class View_SideBySide extends View {
 	protected $class = "form-horizontal";
 
 	public function render() {
-		$this->form->setClass($this->class);
-		echo '<form', $this->form->getAttributes(), '><fieldset>';
-		$this->form->getError()->render();
+		$this->_form->appendAttribute("class", $this->class);
 
-		$elements = $this->form->getElements();
+		echo '<form', $this->_form->getAttributes(), '><fieldset>';
+		$this->_form->getErrorView()->render();
+
+		$elements = $this->_form->getElements();
 		$elementSize = sizeof($elements);
 		$elementCount = 0;
 		for($e = 0; $e < $elementSize; ++$e) {
@@ -38,7 +39,7 @@ class View_SideBySide extends View {
 	protected function renderLabel(Element $element) {
         $label = $element->getLabel();
         if(!empty($label)) {
-			echo '<label class="control-label" for="', $element->getID(), '">';
+			echo '<label class="control-label" for="', $element->getAttribute("id"), '">';
 			if($element->isRequired())
 				echo '<span class="required">* </span>';
 			echo $label, '</label>'; 
