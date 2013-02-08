@@ -81,8 +81,7 @@ how they are applied to elements.</p>
 <?php	
 $form = new Form("validation");
 $form->configure(array(
-	"prevent" => array("bootstrap", "jQuery"),
-	"novalidate" => 1
+	"prevent" => array("bootstrap", "jQuery")
 ));
 $form->addElement(new Element_Hidden("form", "validation"));
 $form->addElement(new Element_Textbox("Require:", "Required", array(
