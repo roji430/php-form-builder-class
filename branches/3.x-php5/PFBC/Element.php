@@ -8,6 +8,7 @@ abstract class Element extends Base {
 	protected $shortDesc;
 	protected $longDesc;
 	protected $validation = array();
+	protected $prefillAfterValidation = 1;
 
 	public function __construct($label, $name, array $properties = null) {
 		$configuration = array(
@@ -26,7 +27,7 @@ abstract class Element extends Base {
 	/*When an element is serialized and stored in the session, this method prevents any non-essential
 	information from being included.*/
 	public function __sleep() {
-		return array("_attributes", "label", "validation");
+		return array("_attributes", "label", "validation", "prefillAfterValidation");
 	}
 
 	/*If an element requires external stylesheets, this method is used to return an
